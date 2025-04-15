@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Point {
   x: number;
@@ -19,6 +19,7 @@ export function TrailAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>();
   const mouseMoved = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   const pointer = useRef({
     x: 0,
@@ -34,6 +35,16 @@ export function TrailAnimation() {
   };
 
   const trail = useRef<Point[]>([]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -114,36 +125,68 @@ export function TrailAnimation() {
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseMoved.current = true;
-      const pos = getMousePos(e);
-      pointer.current = pos;
+      if (isMobile) {
+        const rect = canvas.getBoundingClientRect();
+        if (
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
+        ) {
+          mouseMoved.current = true;
+          const pos = getMousePos(e);
+          pointer.current = pos;
+        }
+      } else {
+        mouseMoved.current = true;
+        const pos = getMousePos(e);
+        pointer.current = pos;
+      }
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       e.preventDefault();
-      mouseMoved.current = true;
-      const pos = getMousePos(e.touches[0]);
-      pointer.current = pos;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      if (
+        touch.clientX >= rect.left &&
+        touch.clientX <= rect.right &&
+        touch.clientY >= rect.top &&
+        touch.clientY <= rect.bottom
+      ) {
+        mouseMoved.current = true;
+        const pos = getMousePos(touch);
+        pointer.current = pos;
+      }
     };
 
     setupCanvas();
     initTrail();
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    // Add event listeners based on device type
+    if (isMobile) {
+      canvas.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+    } else {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
     window.addEventListener("resize", setupCanvas);
 
     animationFrameRef.current = window.requestAnimationFrame(update);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("touchmove", handleTouchMove);
+      if (isMobile) {
+        canvas.removeEventListener("mousemove", handleMouseMove);
+        canvas.removeEventListener("touchmove", handleTouchMove);
+      } else {
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
       window.removeEventListener("resize", setupCanvas);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <canvas
