@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TrailAnimation } from '../components/TrailAnimation';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 export function Home() {
-  const [touchStart, setTouchStart] = useState<number | null>(null);
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -67,171 +66,121 @@ export function Home() {
     }
   ];
 
-  const handleTouchStart = (e: React.TouchEvent, index: number) => {
-    setTouchStart(e.touches[0].clientX);
-    if (isMobile) {
-      setActiveCardIndex(index);
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent, index: number) => {
-    if (!touchStart) return;
-
-    const currentTouch = e.touches[0].clientX;
-    const diff = touchStart - currentTouch;
-
-    // If swipe distance is more than 50px, toggle the card state
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        // Swipe left
-        setActiveCardIndex(index);
-      } else {
-        // Swipe right
-        setActiveCardIndex(null);
-      }
-      setTouchStart(null);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setTouchStart(null);
-  };
-
   return (
-    <div className="min-h-screen p-4">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[calc(100vh-32px)]">
+    <div className="min-h-screen p-4 overflow-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px] md:auto-rows-[calc(50vh-20px)]">
         {projects.map((project, index) => (
-          <Link
-            key={index}
-            to={index === 0 ? '/about' : project.path || '/'}
-            className={`
-              group
-              relative overflow-hidden rounded-2xl
-              ${project.color}
-              ${project.textColor || 'text-white'}
-              ${index < 3 ? 'h-[calc(50vh-20px)]' : 'h-[calc(50vh-20px)]'}
-              transition-all duration-500 ease-out
-              ${!isMobile && 'hover:scale-[0.98]'}
-            `}
-            onTouchStart={(e) => handleTouchStart(e, index)}
-            onTouchMove={(e) => handleTouchMove(e, index)}
-            onTouchEnd={handleTouchEnd}
-          >
-            {/* Swipe Indicator - Only visible on mobile */}
+          <div key={index} className="relative">
+            {/* Mobile Toggle Button - Only visible on mobile */}
             {isMobile && index !== 0 && (
-              <div className={`
-                absolute inset-0 z-30 pointer-events-none
-                ${activeCardIndex === index ? 'opacity-0' : 'opacity-100'}
-                transition-opacity duration-300
-              `}>
-                <div className="absolute inset-y-0 left-4 flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center animate-swipeLeft">
-                    <ChevronLeft className="w-5 h-5 text-white" />
-                  </div>
-                </div>
-                <div className="absolute inset-y-0 right-4 flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center animate-swipeRight">
-                    <ChevronRight className="w-5 h-5 text-white" />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {index === 0 ? (
-              <>
-                {/* Trail Animation */}
-                <div className={`absolute inset-0 ${!isMobile ? 'opacity-0 group-hover:opacity-100' : ''} transition-opacity duration-700`}>
-                  <TrailAnimation />
-                </div>
-                {/* Hover Title */}
-                <div className={`absolute top-8 left-8 ${!isMobile ? 'opacity-0 group-hover:opacity-100' : ''} transition-all duration-700 delay-100 z-30`}>
-                  <div>
-                    <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-neutral-800">
-                      ADRIANO<br />LUIZELLO
-                    </h1>
-                    <p className="mt-2 text-neutral-600">Product Designer</p>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="absolute inset-0 w-full h-full">
-                {/* Base Image */}
-                <img 
-                  src={project.image}
-                  alt=""
-                  className={`absolute inset-0 w-full h-full object-cover object-center 
-                    ${!isMobile 
-                      ? 'opacity-100 group-hover:opacity-0' 
-                      : activeCardIndex === index ? 'opacity-0' : 'opacity-100'
-                    } 
-                    transition-opacity duration-700`}
-                />
-                {/* Hover Image */}
-                <img 
-                  src={project.hoverImage}
-                  alt=""
-                  className={`absolute inset-0 w-full h-full object-cover object-center 
-                    ${!isMobile 
-                      ? 'opacity-0 group-hover:opacity-100' 
-                      : activeCardIndex === index ? 'opacity-100' : 'opacity-0'
-                    } 
-                    transition-opacity duration-700`}
-                />
-                <div className={`absolute inset-0 bg-black/20 
-                  ${!isMobile 
-                    ? 'group-hover:opacity-0' 
-                    : activeCardIndex === index ? 'opacity-0' : 'opacity-100'
-                  } 
-                  transition-opacity duration-700`} 
-                />
-              </div>
+              <button
+                className="absolute z-20 right-4 top-4 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center"
+                onClick={() => setActiveCardIndex(activeCardIndex === index ? null : index)}
+              >
+                <ChevronRight className={`w-6 h-6 text-white transition-transform duration-300 ${activeCardIndex === index ? 'rotate-180' : ''}`} />
+              </button>
             )}
             
-            {/* Content */}
-            <div className="relative z-20 h-full p-8">
-              <div className="h-full flex flex-col">
-                <div className={`
-                  ${index === 0 ? '' : 'max-w-[65%]'} 
-                  transition-opacity duration-700 
-                  ${!isMobile 
-                    ? 'group-hover:opacity-0'
-                    : activeCardIndex === index ? 'opacity-0' : 'opacity-100'
-                  }
-                `}>
-                  {index === 0 ? (
-                    <>
-                      {project.title.split('\n').map((line, i) => (
-                        <h1 key={i} className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-neutral-800">
-                          {line}
-                        </h1>
-                      ))}
-                      <p className="mt-2 text-neutral-600">{project.role}</p>
-                    </>
-                  ) : (
-                    <>
-                      <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-2">
-                        {project.title}
-                      </h2>
-                      {project.subtitle && (
-                        <p className="text-sm text-white/60 leading-relaxed">
-                          {project.subtitle}
-                        </p>
-                      )}
-                    </>
-                  )}
-                </div>
-                <div className="mt-auto">
-                  <div className={`w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm 
+            <Link
+              to={index === 0 ? '/about' : project.path || '/'}
+              className={`
+                group
+                block
+                relative overflow-hidden rounded-2xl
+                ${project.color}
+                ${project.textColor || 'text-white'}
+                h-full
+                transition-all duration-500 ease-out
+                ${!isMobile && 'hover:scale-[0.98]'}
+              `}
+            >
+              {index === 0 ? (
+                <>
+                  {/* Trail Animation */}
+                  <div className={`absolute inset-0 ${!isMobile ? 'opacity-0 group-hover:opacity-100' : ''} transition-opacity duration-700`}>
+                    <TrailAnimation />
+                  </div>
+                  {/* Hover Title */}
+                  <div className={`absolute top-8 left-8 ${!isMobile ? 'opacity-0 group-hover:opacity-100' : ''} transition-all duration-700 delay-100 z-30`}>
+                    <div>
+                      <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-neutral-800">
+                        ADRIANO<br />LUIZELLO
+                      </h1>
+                      <p className="mt-2 text-neutral-600">Product Designer</p>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="absolute inset-0 w-full h-full">
+                  {/* Base Image */}
+                  <img 
+                    src={project.image}
+                    alt=""
+                    className={`absolute inset-0 w-full h-full object-cover object-center 
+                      ${!isMobile 
+                        ? 'opacity-100 group-hover:opacity-0' 
+                        : activeCardIndex === index ? 'opacity-0' : 'opacity-100'
+                      } 
+                      transition-opacity duration-700`}
+                  />
+                  {/* Hover Image */}
+                  <img 
+                    src={project.hoverImage}
+                    alt=""
+                    className={`absolute inset-0 w-full h-full object-cover object-center 
+                      ${!isMobile 
+                        ? 'opacity-0 group-hover:opacity-100' 
+                        : activeCardIndex === index ? 'opacity-100' : 'opacity-0'
+                      } 
+                      transition-opacity duration-700`}
+                  />
+                  <div className={`absolute inset-0 bg-black/20 
                     ${!isMobile 
-                      ? 'opacity-0 group-hover:opacity-100' 
-                      : activeCardIndex === index ? 'opacity-100' : 'opacity-0'
+                      ? 'group-hover:opacity-0' 
+                      : activeCardIndex === index ? 'opacity-0' : 'opacity-100'
                     } 
                     transition-opacity duration-700`} 
                   />
                 </div>
+              )}
+              
+              {/* Content */}
+              <div className="relative z-10 h-full p-8">
+                <div className="h-full flex flex-col">
+                  <div className={`
+                    ${index === 0 ? '' : 'max-w-[65%]'} 
+                    transition-opacity duration-700 
+                    ${!isMobile 
+                      ? 'group-hover:opacity-0'
+                      : activeCardIndex === index ? 'opacity-0' : 'opacity-100'
+                    }
+                  `}>
+                    {index === 0 ? (
+                      <>
+                        {project.title.split('\n').map((line, i) => (
+                          <h1 key={i} className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-neutral-800">
+                            {line}
+                          </h1>
+                        ))}
+                        <p className="mt-2 text-neutral-600">{project.role}</p>
+                      </>
+                    ) : (
+                      <>
+                        <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-2">
+                          {project.title}
+                        </h2>
+                        {project.subtitle && (
+                          <p className="text-sm text-white/60 leading-relaxed">
+                            {project.subtitle}
+                          </p>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
     </div>

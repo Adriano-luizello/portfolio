@@ -1,13 +1,38 @@
 import { useState } from 'react';
-import { Instagram, Linkedin, FileDown, ArrowUpRight } from 'lucide-react';
+import { Instagram, Linkedin, FileDown, ArrowUpRight, Loader2, CheckCircle } from 'lucide-react';
 
 export function About() {
   const [activeSkill, setActiveSkill] = useState<number | null>(null);
   const [activeExp, setActiveExp] = useState<number | null>(null);
+  const [downloadState, setDownloadState] = useState<'idle' | 'loading' | 'success'>('idle');
+
+  const handleDownload = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setDownloadState('loading');
+    
+    try {
+      const response = await fetch('/files/adrian-luizello-cv.pdf');
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'adrian-luizello-cv.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      
+      setDownloadState('success');
+      setTimeout(() => setDownloadState('idle'), 2000);
+    } catch (error) {
+      console.error('Download failed:', error);
+      setDownloadState('idle');
+    }
+  };
 
   const socialLinks = [
-    { icon: Instagram, href: "#", color: "hover:text-pink-500" },
-    { icon: Linkedin, href: "#", color: "hover:text-blue-600" }
+    { icon: Instagram, href: "https://www.instagram.com/adrianoluizello/", color: "hover:text-pink-500" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/adrianoluizello/", color: "hover:text-blue-600" }
   ];
 
   const skills = [
@@ -62,11 +87,11 @@ export function About() {
   ];
 
   return (
-    <div className="pt-24 px-4 pb-16">
+    <div className="pt-24 px-4 pb-16 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
           <div className="relative">
-            <div className="sticky top-24">
+            <div className="md:sticky top-24">
               <h1 className="text-4xl md:text-5xl font-bold mb-12 transform transition-all duration-500 hover:scale-105 animate-fade-in whitespace-nowrap">
                 UX Designer & Business Alchemist
               </h1>
@@ -89,19 +114,43 @@ export function About() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-fade-in [animation-delay:1000ms]">
-                <a 
-                  href="/adrian-luizello-cv.pdf" 
-                  download
-                  className="group flex items-center justify-center gap-2 px-6 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-all duration-300"
+                <button 
+                  onClick={handleDownload}
+                  disabled={downloadState !== 'idle'}
+                  className={`group flex items-center justify-center gap-2 px-6 py-3 rounded-full transition-all duration-300 ${
+                    downloadState === 'idle' 
+                      ? 'bg-white text-black hover:bg-white/90' 
+                      : downloadState === 'loading'
+                      ? 'bg-white/80 text-black cursor-wait'
+                      : 'bg-green-500 text-white'
+                  }`}
                 >
-                  <span>Download CV</span>
-                  <FileDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
-                </a>
+                  {downloadState === 'idle' && (
+                    <>
+                      <span>Download CV</span>
+                      <FileDown className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+                    </>
+                  )}
+                  {downloadState === 'loading' && (
+                    <>
+                      <span>Downloading</span>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    </>
+                  )}
+                  {downloadState === 'success' && (
+                    <>
+                      <span>Complete</span>
+                      <CheckCircle className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
                 <div className="flex gap-4">
                   {socialLinks.map((social, index) => (
                     <a
                       key={index}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm ${social.color} transition-all duration-300 hover:scale-110 hover:bg-white/20`}
                     >
                       <social.icon className="w-5 h-5" />
@@ -118,7 +167,7 @@ export function About() {
                 <img 
                   src="/images/profile/profile.jpg"
                   alt="Adriano Luizello"
-                  className="w-full h-[900px] object-cover object-[center_15%] rounded-3xl transform transition-all duration-700 group-hover:scale-[1.01] animate-fade-in [animation-delay:200ms]"
+                  className="w-full h-[400px] md:h-[900px] object-cover object-[center_15%] rounded-3xl transform transition-all duration-700 group-hover:scale-[1.01] animate-fade-in [animation-delay:200ms]"
                 />
               </div>
             </div>
