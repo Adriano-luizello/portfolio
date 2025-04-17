@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Briefcase, User, Mail, Menu, X } from 'lucide-react';
+import { Home, Briefcase, Wrench, User, Mail, Menu, X } from 'lucide-react';
 
 export function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
-    { path: '/services', icon: Briefcase, label: 'Services' },
+    { path: '/work', icon: Briefcase, label: 'Work' },
+    { path: '/services', icon: Wrench, label: 'Services' },
     { path: '/about', icon: User, label: 'About' },
     { path: '/contact', icon: Mail, label: 'Contact' }
   ];
@@ -17,10 +18,10 @@ export function Navigation() {
     <>
       {/* Mobile Menu Button */}
       <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={() => setIsOpen(!isOpen)}
         className="fixed right-4 top-4 z-50 p-3 bg-neutral-900/80 backdrop-blur-md rounded-full lg:hidden"
       >
-        {isMenuOpen ? (
+        {isOpen ? (
           <X className="w-6 h-6" />
         ) : (
           <Menu className="w-6 h-6" />
@@ -31,7 +32,7 @@ export function Navigation() {
       <nav className={`
         fixed inset-0 z-40 bg-black/95 backdrop-blur-md lg:hidden
         transition-all duration-300 ease-in-out
-        ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
+        ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
       `}>
         <div className="flex flex-col items-center justify-center h-full gap-8">
           {navItems.map((item) => {
@@ -42,7 +43,7 @@ export function Navigation() {
               <Link
                 key={item.path}
                 to={item.path}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setIsOpen(false)}
                 className={`
                   flex items-center gap-3 px-6 py-3 rounded-full
                   transition-all duration-300 text-lg
