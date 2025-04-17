@@ -6,7 +6,6 @@ import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
 import { Contact } from './pages/Contact';
-import { Work } from './pages/Work';
 import { PetrosCaseStudy } from './pages/case-studies/Petros';
 import { PepperLawCaseStudy } from './pages/case-studies/PepperLaw';
 import { BiblePlusCaseStudy } from './pages/case-studies/BiblePlus';
@@ -19,7 +18,7 @@ class ErrorBoundary extends React.Component<{children: React.ReactNode}, {hasErr
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(_: Error) {
+  static getDerivedStateFromError(_error: any) {
     return { hasError: true };
   }
 
@@ -51,7 +50,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/work" element={<Work />} />
           <Route path="/case-studies/petros" element={<PetrosCaseStudy />} />
           <Route path="/case-studies/pepperlaw" element={<PepperLawCaseStudy />} />
           <Route path="/case-studies/bibleplus" element={<BiblePlusCaseStudy />} />
