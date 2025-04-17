@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Briefcase, Wrench, User, Mail, Menu, X } from 'lucide-react';
+import { Home, Briefcase, User, Mail, Menu, X } from 'lucide-react';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,8 +8,7 @@ export function Navigation() {
 
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
-    { path: '/work', icon: Briefcase, label: 'Work' },
-    { path: '/services', icon: Wrench, label: 'Services' },
+    { path: '/services', icon: Briefcase, label: 'Services' },
     { path: '/about', icon: User, label: 'About' },
     { path: '/contact', icon: Mail, label: 'Contact' }
   ];
