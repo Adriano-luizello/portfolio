@@ -2,6 +2,12 @@ import { ArrowLeft, Users, Target, CheckCircle2, Calendar, Code, Trophy, Lightbu
 import { Link } from 'react-router-dom';
 import { ComparisonSlider } from '../../components/ComparisonSlider';
 
+// Helper function to convert YouTube URL to embed URL
+function getYouTubeEmbedUrl(url: string) {
+  const videoId = url.split('v=')[1]?.split('&')[0];
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=1&rel=0&showinfo=1&modestbranding=1&playsinline=1&loop=1&playlist=${videoId}`;
+}
+
 // Figma icon component
 function FigmaIcon() {
   return (
@@ -83,20 +89,32 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
           </p>
           <div className="rounded-3xl overflow-hidden bg-neutral-900">
             {props.coverVideo ? (
-              <video 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="w-full"
-              >
-                <source src={props.coverVideo} type="video/quicktime" />
-                <img 
-                  src={props.coverImage}
-                  alt={`${props.title} cover`}
+              props.coverVideo.includes('youtube.com') ? (
+                <div className="relative pt-[56.25%]">
+                  <iframe
+                    src={getYouTubeEmbedUrl(props.coverVideo)}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={`${props.title} cover video`}
+                  />
+                </div>
+              ) : (
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
                   className="w-full"
-                />
-              </video>
+                >
+                  <source src={props.coverVideo} type="video/quicktime" />
+                  <img 
+                    src={props.coverImage}
+                    alt={`${props.title} cover`}
+                    className="w-full"
+                  />
+                </video>
+              )
             ) : (
               <img 
                 src={props.coverImage}
