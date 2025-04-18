@@ -23,6 +23,7 @@ interface CaseStudyProps {
   team: string;
   technologies: string[];
   coverImage: string;
+  coverVideo?: string;
   problemStatement: string;
   process: {
     research: string[];
@@ -81,11 +82,28 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
             {props.description}
           </p>
           <div className="rounded-3xl overflow-hidden bg-neutral-900">
-            <img 
-              src={props.coverImage}
-              alt={`${props.title} cover`}
-              className="w-full"
-            />
+            {props.coverVideo ? (
+              <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="w-full"
+              >
+                <source src={props.coverVideo} type="video/quicktime" />
+                <img 
+                  src={props.coverImage}
+                  alt={`${props.title} cover`}
+                  className="w-full"
+                />
+              </video>
+            ) : (
+              <img 
+                src={props.coverImage}
+                alt={`${props.title} cover`}
+                className="w-full"
+              />
+            )}
           </div>
         </div>
       )}

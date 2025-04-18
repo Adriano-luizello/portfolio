@@ -10,6 +10,7 @@ const caseStudyData = {
   team: "3 Designers, 15 Developers, 3 Product Owners",
   technologies: ["React", "TypeScript", "Node.js", "AWS"],
   coverImage: "/images/choreograph/cover.png",
+  coverVideo: "/videos/choreograph/cover.mov",
   problemStatement: "Choreograph's legacy ad platform was stuck in the dark ages—think Frankenstein's monster of spreadsheets, fragmented workflows, and zero version control. Creative teams and activation specialists were constantly at war over who broke what, while clients got lost in a maze of unapproved changes and untraceable targeting logic.",
   process: {
     research: [
