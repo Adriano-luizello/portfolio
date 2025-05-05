@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "types": [
+      "node",
+      "express",
+      "cors",
+      "helmet",
+      "express-rate-limit",
+      "dotenv",
+      "jsonwebtoken",
+      "bcryptjs"
+    ]
+  },
+  "include": ["./**/*"],
+  "exclude": ["node_modules", "dist"]
+} 

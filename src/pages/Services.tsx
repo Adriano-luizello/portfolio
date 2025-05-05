@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lightbulb, Palette, LayoutDashboard, Target, Repeat, Users, Layers, Sparkles } from 'lucide-react';
 
