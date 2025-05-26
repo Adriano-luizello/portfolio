@@ -9,7 +9,8 @@ const BLOCKED_EMAILS = [
   'maximilianraabe96@gmx.de',
   'maxiraabe@yahoo.com',
   'Maximilianraabe@web.de',
-  'maxiraabe@yahoo.com'
+  'maxiraabe@yahoo.com',
+  'maximilianraabe7@gmail.com'
 ];
 
 type FormData = {
