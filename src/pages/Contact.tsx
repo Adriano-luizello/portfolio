@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { Mail, MapPin, Phone, Send, Loader2, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
+// Add blocked emails list
+const BLOCKED_EMAILS = [
+  'maximilianraabe@web.de',
+  'maximilianraabe1@t-online.de',
+  'maximilianraabe96@gmx.de',
+  'maxiraabe@yahoo.com'
+];
+
 type FormData = {
   name: string;
   reply_to: string;
@@ -50,6 +58,20 @@ export function Contact() {
     } else if (!emailRegex.test(formData.reply_to)) {
       newErrors.reply_to = 'Please enter a valid email address';
       isValid = false;
+    } else {
+      // Check if email is blocked
+      const isBlocked = BLOCKED_EMAILS.some(blockedEmail => 
+        formData.reply_to.toLowerCase() === blockedEmail.toLowerCase()
+      );
+
+      if (isBlocked) {
+        // Silently reject blocked emails
+        setSubmitStatus({
+          type: 'success',
+          message: 'Message sent successfully! I will get back to you soon.'
+        });
+        return false;
+      }
     }
 
     // Subject validation
