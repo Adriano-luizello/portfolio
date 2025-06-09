@@ -1,10 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Instagram, Linkedin, FileDown, ArrowUpRight, Loader2, CheckCircle } from 'lucide-react';
 
 export function About() {
   const [activeSkill, setActiveSkill] = useState<number | null>(null);
   const [activeExp, setActiveExp] = useState<number | null>(null);
   const [downloadState, setDownloadState] = useState<'idle' | 'loading' | 'success'>('idle');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add event listener
+    window.addEventListener('resize', checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleDownload = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -192,8 +208,16 @@ export function About() {
                   <div 
                     className="h-full bg-white transition-all duration-700 ease-out"
                     style={{ 
-                      width: activeSkill === index ? `${skill.level}%` : '0%',
-                      opacity: activeSkill === index ? 1 : 0.3
+                      width: isMobile 
+                        ? `${skill.level}%`  // Show actual skill level on mobile
+                        : activeSkill === index 
+                          ? `${skill.level}%`  // Show on hover for desktop
+                          : '0%',
+                      opacity: isMobile 
+                        ? 1  // Full opacity on mobile
+                        : activeSkill === index 
+                          ? 1  // Full opacity on hover for desktop
+                          : 0.3
                     }}
                   />
                 </div>
