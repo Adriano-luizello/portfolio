@@ -6,6 +6,10 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/files/(.*)",
+      "destination": "/files/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
