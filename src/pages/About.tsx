@@ -27,15 +27,13 @@ export function About() {
     setDownloadState('loading');
     
     try {
-      const response = await fetch('/files/adrian-luizello-cv.pdf');
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      // Create a direct link instead of using fetch
       const a = document.createElement('a');
-      a.href = url;
-      a.download = 'adrian-luizello-cv.pdf';
+      a.href = '/files/adriano-luizello-cv.pdf';
+      a.download = 'adriano-luizello-cv.pdf';
+      a.target = '_blank'; // Open in new tab to avoid rewrite issues
       document.body.appendChild(a);
       a.click();
-      window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
       
       setDownloadState('success');
