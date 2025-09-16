@@ -62,7 +62,7 @@ export function Navigation() {
 
       {/* Desktop Navigation */}
       <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block">
-        <div className="flex flex-row gap-3 p-4 bg-neutral-900/80 backdrop-blur-md rounded-full transition-all duration-500 ease-out hover:bg-neutral-900/90 hover:shadow-2xl hover:shadow-black/20">
+        <div className="flex flex-row gap-3 px-4 py-3 bg-neutral-900/80 backdrop-blur-md rounded-full transition-all duration-500 ease-out hover:bg-neutral-900/90 hover:shadow-2xl hover:shadow-black/20 border border-white/20 shadow-inner">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
