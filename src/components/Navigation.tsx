@@ -61,8 +61,8 @@ export function Navigation() {
       </nav>
 
       {/* Desktop Navigation */}
-      <nav className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
-        <div className="flex flex-col gap-4 p-4 bg-neutral-900/80 backdrop-blur-md rounded-full">
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block">
+        <div className="flex flex-row gap-3 p-4 bg-neutral-900/80 backdrop-blur-md rounded-full transition-all duration-500 ease-out hover:bg-neutral-900/90 hover:shadow-2xl hover:shadow-black/20">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             const Icon = item.icon;
@@ -72,19 +72,36 @@ export function Navigation() {
                 key={item.path}
                 to={item.path}
                 className={`
-                  group relative w-10 h-10 flex items-center justify-center rounded-full
-                  transition-all duration-300
-                  ${isActive ? 'bg-white text-black' : 'text-white/80 hover:bg-white/10 hover:text-white'}
+                  group relative flex items-center gap-3 px-4 py-3 rounded-full
+                  transition-all duration-500 ease-out transform
+                  ${isActive 
+                    ? 'bg-white text-black scale-105 shadow-lg' 
+                    : 'text-white/80 hover:bg-white/10 hover:text-white hover:scale-105'
+                  }
                 `}
               >
-                <Icon className="w-5 h-5" />
-                <span className="
-                  absolute left-14 px-3 py-1.5 bg-neutral-900 text-white rounded-lg
-                  opacity-0 invisible group-hover:opacity-100 group-hover:visible
-                  transition-all duration-300 whitespace-nowrap text-sm
-                ">
+                <Icon className={`w-5 h-5 transition-all duration-500 ${
+                  isActive ? 'scale-110' : 'group-hover:scale-110'
+                }`} />
+                <span className={`
+                  text-sm font-medium whitespace-nowrap transition-all duration-500 ease-out
+                  ${isActive 
+                    ? 'opacity-100 translate-x-0 scale-100' 
+                    : 'opacity-0 -translate-x-2 scale-95 absolute'
+                  }
+                `}>
                   {item.label}
                 </span>
+                {!isActive && (
+                  <span className="
+                    absolute bottom-14 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-neutral-900 text-white rounded-lg
+                    opacity-0 invisible group-hover:opacity-100 group-hover:visible
+                    transition-all duration-300 whitespace-nowrap text-sm
+                    group-hover:scale-105 group-hover:-translate-y-1
+                  ">
+                    {item.label}
+                  </span>
+                )}
               </Link>
             );
           })}
