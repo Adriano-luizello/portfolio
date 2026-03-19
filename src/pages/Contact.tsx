@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, Phone, Send, Loader2, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
-import emailjs from '@emailjs/browser';
-
-// Add blocked emails list
-const BLOCKED_EMAILS = [
-  'maximilianraabe@web.de',
-  'maximilianraabe1@t-online.de',
-  'maximilianraabe96@gmx.de',
-  'maxiraabe@yahoo.com',
-  'Maximilianraabe@web.de',
-  'maxiraabe@yahoo.com',
-  'maximilianraabe7@gmail.com'
-];
 
 type FormData = {
   name: string;
@@ -61,20 +49,6 @@ export function Contact() {
     } else if (!emailRegex.test(formData.reply_to)) {
       newErrors.reply_to = 'Please enter a valid email address';
       isValid = false;
-    } else {
-      // Check if email is blocked
-      const isBlocked = BLOCKED_EMAILS.some(blockedEmail => 
-        formData.reply_to.toLowerCase() === blockedEmail.toLowerCase()
-      );
-
-      if (isBlocked) {
-        // Silently reject blocked emails
-        setSubmitStatus({
-          type: 'success',
-          message: 'Message sent successfully! I will get back to you soon.'
-        });
-        return false;
-      }
     }
 
     // Subject validation
@@ -102,13 +76,7 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please fix the errors in the form'
-      });
-      return;
-    }
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
@@ -124,26 +92,26 @@ export function Contact() {
         minute: '2-digit'
       });
 
-      const templateParams = {
-        ...formData,
-        to_name: 'Adriano',
-        to_email: 'aluizello@gmail.com',
-        time: timeString
-      };
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '749d0906-4bb9-40b6-94aa-e1bd4c857bcb',
+          name: formData.name,
+          email: formData.reply_to,
+          subject: formData.subject,
+          message: formData.message,
+          time: timeString,
+        }),
+      });
 
-      const result = await emailjs.send(
-        'service_mnl90ud',
-        'template_as4aa0l',
-        templateParams,
-        'n3Wt3sAraoFGteVJN'
-      );
+      const data = await response.json();
 
-      if (result.text === 'OK') {
+      if (data.success) {
         setSubmitStatus({
           type: 'success',
           message: 'Message sent successfully! I will get back to you soon.'
         });
-        // Clear form
         setFormData({
           name: '',
           reply_to: '',
@@ -151,6 +119,8 @@ export function Contact() {
           message: ''
         });
         setErrors({});
+      } else {
+        throw new Error(data.message || 'Failed to send');
       }
     } catch (error) {
       setSubmitStatus({
