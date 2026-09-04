@@ -58,6 +58,7 @@ const caseStudyData = {
       description: "Decrease in customer support tickets"
     }
   ],
+  resultsAreProjected: false,
   images: {
     wireframes: [
       "/images/petros/wireframe-1.png",

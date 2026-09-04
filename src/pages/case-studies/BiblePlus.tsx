@@ -94,6 +94,7 @@ const caseStudyData = {
       description: "Expanded user base including atheists and writers"
     }
   ],
+  resultsAreProjected: false,
   images: {
     wireframes: [
       "/images/bibleplus/wireframe-1.jpg",

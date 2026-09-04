@@ -94,6 +94,7 @@ const caseStudyData = {
       description: "System ready for new asset classes"
     }
   ],
+  resultsAreProjected: false,
   images: {
     wireframes: [
       "/images/lemans/wireframe-1.png"

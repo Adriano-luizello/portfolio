@@ -57,6 +57,7 @@ const caseStudyData = {
       description: "When's the last time someone shared a legal doc for fun?"
     }
   ],
+  resultsAreProjected: true,
   images: {
     wireframes: [],
     final: [

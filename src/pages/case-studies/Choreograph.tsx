@@ -1,6 +1,4 @@
 import { CaseStudyTemplate } from './CaseStudyTemplate';
-import { PasswordProtection } from '../../components/PasswordProtection';
-import { useEffect, useState } from 'react';
 
 const caseStudyData = {
   title: "Redesigning Choreograph: The Omnichannel Revolution",
@@ -11,6 +9,7 @@ const caseStudyData = {
   technologies: ["React", "TypeScript", "Node.js", "AWS"],
   coverImage: "/images/choreograph/cover.png",
   coverVideo: "https://www.youtube.com/watch?v=yOF-SwgrgL8",
+  confidentialityNote: "Screens shown are product interfaces from my work at Choreograph. Client data, campaign details and identifying information have been omitted.",
   problemStatement: "Choreograph's legacy ad platform was stuck in the dark ages—think Frankenstein's monster of spreadsheets, fragmented workflows, and zero version control. Creative teams and activation specialists were constantly at war over who broke what, while clients got lost in a maze of unapproved changes and untraceable targeting logic.",
   process: {
     research: [
@@ -61,6 +60,7 @@ const caseStudyData = {
       description: "Decrease in targeting and version control errors"
     }
   ],
+  resultsAreProjected: false,
   images: {
     wireframes: [
       "/images/choreograph/wireframe-1.jpg",
@@ -99,23 +99,5 @@ const caseStudyData = {
 };
 
 export function ChoreographCaseStudy() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    // Check if user is already authenticated
-    const auth = localStorage.getItem('choreograph-auth');
-    if (auth === 'true') {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  const handleAuthSuccess = () => {
-    setIsAuthenticated(true);
-  };
-
-  if (!isAuthenticated) {
-    return <PasswordProtection onSuccess={handleAuthSuccess} />;
-  }
-
   return <CaseStudyTemplate {...caseStudyData} />;
-} 
+}

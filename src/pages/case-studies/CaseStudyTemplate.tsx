@@ -30,19 +30,21 @@ interface CaseStudyProps {
   technologies: string[];
   coverImage: string;
   coverVideo?: string;
+  confidentialityNote?: string;
   problemStatement: string;
   process: {
     research: string[];
     design: string[];
     development: string[];
   };
-  challenges: string[];
+  challenges?: string[];
   solutions: string[];
   results: {
     metric: string;
     value: string;
     description: string;
   }[];
+  resultsAreProjected?: boolean;
   images: {
     wireframes: string[];
     final: string[];
@@ -188,6 +190,12 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
         </div>
       </div>
 
+      {props.confidentialityNote && (
+        <p className="text-sm text-white/40 mb-8 max-w-3xl leading-relaxed">
+          {props.confidentialityNote}
+        </p>
+      )}
+
       {/* Problem Statement */}
       <div className="mb-24">
         <h2 className="text-3xl font-bold mb-6">Problem Statement</h2>
@@ -197,6 +205,23 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
           </p>
         </div>
       </div>
+
+      {/* Constraints */}
+      {props.challenges && props.challenges.length > 0 && (
+        <div className="mb-24">
+          <h2 className="text-3xl font-bold mb-6">Constraints</h2>
+          <div className="bg-neutral-900 rounded-3xl p-8">
+            <ul className="space-y-4">
+              {props.challenges.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 mt-1 text-white/60" />
+                  <p>{item}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
 
       {/* Process */}
       <div className="mb-24">
@@ -339,9 +364,16 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
 
       {/* Results */}
       <div className="mb-24">
-        <h2 className="text-3xl font-bold mb-12">
-          {props.title.includes("PepperLaw") ? "Expected Results" : "Results"}
+        <h2 className={`text-3xl font-bold ${props.resultsAreProjected ? 'mb-6' : 'mb-12'}`}>
+          {props.resultsAreProjected ? "Projected Results" : "Results"}
         </h2>
+        {props.resultsAreProjected && (
+          <div className="bg-neutral-900 rounded-3xl px-8 py-4 mb-12">
+            <p className="text-white/70">
+              These figures are projections, not measured outcomes from a live launch.
+            </p>
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {props.results.map((result, index) => (
             <div key={index} className="bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800 transition-all duration-300">
