@@ -41,10 +41,12 @@ interface CaseStudyProps {
   solutions: string[];
   results: {
     metric: string;
-    value: string;
+    value?: string;
     description: string;
   }[];
   resultsAreProjected?: boolean;
+  resultsNote?: string;
+  lessons?: string[];
   images: {
     wireframes: string[];
     final: string[];
@@ -364,7 +366,7 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
 
       {/* Results */}
       <div className="mb-24">
-        <h2 className={`text-3xl font-bold ${props.resultsAreProjected ? 'mb-6' : 'mb-12'}`}>
+        <h2 className={`text-3xl font-bold ${props.resultsAreProjected || props.resultsNote ? 'mb-6' : 'mb-12'}`}>
           {props.resultsAreProjected ? "Projected Results" : "Results"}
         </h2>
         {props.resultsAreProjected && (
@@ -374,14 +376,29 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
             </p>
           </div>
         )}
+        {props.resultsNote && (
+          <p className="text-sm text-white/50 mb-12 max-w-3xl leading-relaxed">
+            {props.resultsNote}
+          </p>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {props.results.map((result, index) => (
             <div key={index} className="bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800 transition-all duration-300">
               <div className="flex flex-col items-center">
                 <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center mb-6">
-                  <Trophy className="w-6 h-6 text-white/80" />
+                  {result.value ? (
+                    <Trophy className="w-6 h-6 text-white/80" />
+                  ) : (
+                    <CheckCircle2 className="w-6 h-6 text-white/60" />
+                  )}
                 </div>
-                <div className="text-4xl font-bold mb-4">{result.value}</div>
+                {result.value ? (
+                  <div className="text-4xl font-bold mb-4">{result.value}</div>
+                ) : (
+                  <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-4">
+                    Qualitative outcome
+                  </p>
+                )}
                 <h3 className="text-xl font-bold mb-3">{result.metric}</h3>
                 <p className="text-white/60 text-center">{result.description}</p>
               </div>
@@ -389,6 +406,23 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
           ))}
         </div>
       </div>
+
+      {/* Lessons */}
+      {props.lessons && props.lessons.length > 0 && (
+        <div className="mb-24">
+          <h2 className="text-3xl font-bold mb-6">What I learned</h2>
+          <div className="bg-neutral-900 rounded-3xl p-8">
+            <ul className="space-y-4">
+              {props.lessons.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 mt-1 text-white/60" />
+                  <p>{item}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 } 

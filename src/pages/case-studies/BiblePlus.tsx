@@ -113,7 +113,7 @@ const caseStudyData = {
     ]
   },
   lessons: [
-    "Sacred texts need UX too—if Duolingo can make Hebrew fun, so can we",
+    "Sacred texts need UX too if Duolingo can make Hebrew fun, so can we",
     "Don't fear the niche: 'Bible entrepreneurs' became our unpaid marketers",
     "Tone is everything: Serious content + playful delivery = theological TikTok"
   ]

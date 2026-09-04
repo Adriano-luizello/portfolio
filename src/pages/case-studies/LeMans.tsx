@@ -80,21 +80,19 @@ const caseStudyData = {
   results: [
     {
       metric: "User Experience",
-      value: "✓",
       description: "Delivered polished booking experience for high-end users"
     },
     {
       metric: "Operational Control",
-      value: "✓",
       description: "Comprehensive admin tools for business management"
     },
     {
       metric: "Scalability",
-      value: "✓",
       description: "System ready for new asset classes"
     }
   ],
   resultsAreProjected: false,
+  resultsNote: "I delivered the design and moved off the project before launch metrics were collected. The outcomes below are qualitative.",
   images: {
     wireframes: [
       "/images/lemans/wireframe-1.png"
