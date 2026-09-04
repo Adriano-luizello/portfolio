@@ -29,8 +29,8 @@ export function About() {
     try {
       // Create a direct link instead of using fetch
       const a = document.createElement('a');
-      a.href = '/files/adriano-luizello-cv.pdf';
-      a.download = 'adriano-luizello-cv.pdf';
+      a.href = '/files/Adriano-Luizello-CV-2026.pdf';
+      a.download = 'Adriano-Luizello-CV-2026.pdf';
       a.target = '_blank'; // Open in new tab to avoid rewrite issues
       document.body.appendChild(a);
       a.click();
