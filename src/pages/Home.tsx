@@ -2,6 +2,18 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TrailAnimation } from '../components/TrailAnimation';
 import { ChevronRight } from 'lucide-react';
+import { caseStudies } from '../data/caseStudies';
+
+type HomeProject = {
+  title: string;
+  color: string;
+  role?: string;
+  textColor?: string;
+  subtitle?: string;
+  image?: string;
+  hoverImage?: string;
+  path?: string;
+};
 
 export function Home() {
   const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
@@ -17,53 +29,14 @@ export function Home() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const projects = [
+  const projects: HomeProject[] = [
     {
       title: "ADRIANO\nLUIZELLO",
       role: "Product Designer",
       color: "bg-gradient-to-br from-neutral-50 to-neutral-100",
       textColor: "text-black"
     },
-    {
-      title: "Petros",
-      subtitle: "From Pension Paperwork to One-Click Magic",
-      image: "/images/petros/card.png",
-      hoverImage: "/images/petros/cardhover.png",
-      color: "bg-neutral-900",
-      path: "/case-studies/petros"
-    },
-    {
-      title: "Le Mans",
-      subtitle: "Luxury Rentals, Simplified",
-      image: "/images/lemans/card.png",
-      hoverImage: "/images/lemans/cardhover.png",
-      color: "bg-[#1A1A1A]",
-      path: "/case-studies/lemans"
-    },
-    {
-      title: "Bible+",
-      subtitle: "AI-Powered Bible Study App",
-      image: "/images/bibleplus/card.png",
-      hoverImage: "/images/bibleplus/cardhover.png",
-      color: "bg-[#2D3648]",
-      path: "/case-studies/bibleplus"
-    },
-    {
-      title: "Choreograph",
-      subtitle: "The Omnichannel Revolution",
-      image: "/images/choreograph/card.png",
-      hoverImage: "/images/choreograph/cardhover.png",
-      color: "bg-[#2A2A2A]",
-      path: "/case-studies/choreograph"
-    },
-    {
-      title: "PepperLaw",
-      subtitle: "AI Legal Tech Made Surprisingly Simple",
-      image: "/images/pepperlaw/card.png",
-      hoverImage: "/images/pepperlaw/cardhover.png",
-      color: "bg-[#1E1E1E]",
-      path: "/case-studies/pepperlaw"
-    }
+    ...caseStudies
   ];
 
   return (

@@ -1,6 +1,8 @@
-import { ArrowLeft, Users, Target, CheckCircle2, Calendar, Code, Trophy, Lightbulb } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { ArrowLeft, ArrowRight, Users, Target, CheckCircle2, Calendar, Code, Trophy, Lightbulb } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { ComparisonSlider } from '../../components/ComparisonSlider';
+import { getAdjacentCaseStudies, type CaseStudyNavItem } from '../../data/caseStudies';
 
 // Helper function to convert YouTube URL to embed URL
 function getYouTubeEmbedUrl(url: string) {
@@ -71,6 +73,13 @@ interface CaseStudyProps {
 }
 
 export function CaseStudyTemplate(props: CaseStudyProps) {
+  const location = useLocation();
+  const adjacent = getAdjacentCaseStudies(location.pathname);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       {/* Back Button */}
@@ -423,6 +432,60 @@ export function CaseStudyTemplate(props: CaseStudyProps) {
           </div>
         </div>
       )}
+
+      {/* Case study navigation */}
+      {adjacent && (
+        <div className="mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CaseStudyNavCard item={adjacent.prev} direction="previous" />
+            <CaseStudyNavCard item={adjacent.next} direction="next" />
+          </div>
+        </div>
+      )}
     </div>
+  );
+}
+
+function CaseStudyNavCard({
+  item,
+  direction,
+}: {
+  item: CaseStudyNavItem;
+  direction: 'previous' | 'next';
+}) {
+  const isNext = direction === 'next';
+
+  return (
+    <Link
+      to={item.path}
+      className={`
+        group relative overflow-hidden rounded-3xl bg-neutral-900
+        hover:bg-neutral-800 transition-all duration-300
+        flex flex-col sm:flex-row ${isNext ? 'sm:flex-row-reverse' : ''}
+        min-h-[140px]
+      `}
+    >
+      <div className="relative w-full sm:w-40 h-36 sm:h-auto flex-shrink-0">
+        <img
+          src={item.image}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/20 group-hover:opacity-0 transition-opacity duration-300" />
+      </div>
+      <div className={`flex-1 p-6 flex flex-col justify-center ${isNext ? 'sm:items-end sm:text-right' : ''}`}>
+        <span className="inline-flex items-center gap-2 text-sm text-white/50 mb-2">
+          {!isNext && <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />}
+          {isNext ? 'Next' : 'Previous'}
+          {isNext && <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />}
+        </span>
+        <h3 className="text-xl font-bold mb-1 group-hover:text-white transition-colors">
+          {item.title}
+        </h3>
+        <p className="text-sm text-white/60 leading-relaxed">
+          {item.subtitle}
+        </p>
+      </div>
+    </Link>
   );
 } 

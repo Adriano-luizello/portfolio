@@ -1,26 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Instagram, Linkedin, FileDown, ArrowUpRight, Loader2, CheckCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Instagram, Linkedin, FileDown, Loader2, CheckCircle } from 'lucide-react';
 
 export function About() {
-  const [activeSkill, setActiveSkill] = useState<number | null>(null);
-  const [activeExp, setActiveExp] = useState<number | null>(null);
   const [downloadState, setDownloadState] = useState<'idle' | 'loading' | 'success'>('idle');
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    // Initial check
-    checkMobile();
-
-    // Add event listener
-    window.addEventListener('resize', checkMobile);
-
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handleDownload = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -49,55 +32,72 @@ export function About() {
     { icon: Linkedin, href: "https://www.linkedin.com/in/adrianoluizello/", color: "hover:text-blue-600" }
   ];
 
-  const skills = [
-    { name: "User Research", level: 95 },
-    { name: "Wireframing", level: 92 },
-    { name: "Prototyping", level: 94 },
-    { name: "User Flows", level: 93 },
-    { name: "A/B Testing", level: 88 },
-    { name: "Strategic Planning", level: 90 },
-    { name: "Management", level: 89 },
-    { name: "Benchmarking", level: 91 },
-    { name: "Adobe XD", level: 95 },
-    { name: "Figma", level: 96 },
-    { name: "Keynote", level: 92 },
-    { name: "Design Thinking", level: 94 }
+  const skillGroups = [
+    {
+      title: "Process",
+      skills: [
+        "Product discovery",
+        "User research",
+        "Usability testing",
+        "Journey mapping",
+        "Problem framing",
+        "Information architecture",
+      ],
+    },
+    {
+      title: "Design",
+      skills: [
+        "Wireframing",
+        "Prototyping",
+        "Interaction design",
+        "UI design",
+        "Design systems",
+        "Responsive and mobile design",
+      ],
+    },
+    {
+      title: "Build",
+      skills: [
+        "React",
+        "TypeScript",
+        "Tailwind",
+        "HTML/CSS",
+        "Cursor and AI-assisted prototyping",
+      ],
+    },
+    {
+      title: "Collaboration",
+      skills: [
+        "Stakeholder management",
+        "Design critique",
+        "Agile with Product and Engineering",
+        "Product strategy",
+      ],
+    },
   ];
 
   const experiences = [
     {
       year: "2022 - Present",
       role: "Product Designer",
-      company: "Choreograph",
-      description: "Leading product design initiatives in Netherlands",
-      achievements: [
-        "Implementing user-centered design methodologies",
-        "Conducting user research and usability testing",
-        "Creating comprehensive design systems"
-      ]
+      company: "Choreograph (WPP Group)",
+      description:
+        "Enterprise SaaS platform for omnichannel media planning and activation. Led an 18-month redesign of a legacy, spreadsheet-based ad platform into a unified workflow, working alongside designers, engineers and product owners.",
     },
     {
       year: "2021 - Present",
-      role: "UX/UI Designer",
-      company: "Freelance",
-      description: "Providing design solutions for international clients from Milan, Italy",
-      achievements: [
-        "Delivering end-to-end design solutions for diverse clients",
-        "Conducting user research and creating user flows",
-        "Developing interactive prototypes and wireframes"
-      ]
+      role: "Product Designer",
+      company: "Independent (Freelance)",
+      description:
+        "Product design for clients in legal tech and consumer apps, plus my own products. PepperLaw, Bible+, and three MVPs built in React with AI tooling.",
     },
     {
       year: "2021 - 2022",
-      role: "UX Designer",
+      role: "Product Designer",
       company: "IK Solution",
-      description: "Led UX design initiatives for 7 months",
-      achievements: [
-        "Implemented user-centered design processes",
-        "Created user flows and wireframes",
-        "Conducted usability testing and iterations"
-      ]
-    }
+      description:
+        "Product consultancy. Client work in pensions and premium rental, including Petros and Le Mans.",
+    },
   ];
 
   return (
@@ -107,27 +107,35 @@ export function About() {
           <div className="relative">
             <div className="md:sticky top-24">
               <h1 className="text-4xl md:text-5xl font-bold mb-12 transform transition-all duration-500 hover:scale-105 animate-fade-in whitespace-nowrap">
-                UX Designer & Business Alchemist
+                Product Designer
               </h1>
               <div className="space-y-8">
                 <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:200ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
-                  I turn business puzzles into user-clicking gold. A two-time founder before 30—ask me about the rollercoaster, I now weaponize design to solve the ultimate double-agent problem: 
-                  <span className="text-white/90 group-hover:text-white inline-block transition-transform group-hover:-translate-y-0.5 group-hover:scale-[1.02]">making users fall head-over-heels while sending revenue graphs blushing.</span> My unfair advantage? A founder-turned-designer brain that speaks both boardroom and behavioral psychology fluently.
+                  I'm a product designer who came to design from the business side.
                 </p>
                 <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:400ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
-                  Every pixel I craft fights for two things simultaneously: 
-                  <span className="text-white/90 group-hover:text-white inline-block transition-transform group-hover:-translate-y-0.5 group-hover:scale-[1.02]">user joy and your KPIs.</span> I operate with a zero-fluff strategy—if it doesn't drive adoption, retention, or sales, it's just decoration. Here's how I work: First, I dissect your business like a VC (but with better color palettes). Then, I engineer desire through interfaces users can't resist clicking. Finally, I optimize the hell out of that magical space between "Aha!" and "Add to Cart."
+                  Before this I spent ten years in business development and founded two companies, which is why I start from the commercial problem rather than the interface. If a design doesn't move adoption, retention or revenue, it's decoration.
                 </p>
                 <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:600ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
-                  My current mission? 
-                  <span className="text-white/90 group-hover:text-white inline-block transition-transform group-hover:-translate-y-0.5 group-hover:scale-[1.02]">Helping companies convert skeptics into fans—one frictionless flow at a time.</span> The proof? Check my case studies or connect on LinkedIn. And yes, I've cried over failed prototypes. No, I regret nothing—every iteration gets us closer to that perfect balance of business-smart and user-delightful.
+                  Most of my work happens where the constraints are real. A pension fund onboarding flow wrapped in legal verification requirements and a backend that only accepted PDFs. A legal tech platform where terminology couldn't be simplified freely. An enterprise ad platform under privacy compliance. In each one the job was the same: work out which friction is doing real work, and remove the rest without breaking anything.
                 </p>
-                <p className="text-xl font-medium text-white/90 leading-relaxed animate-fade-in [animation-delay:800ms] hover:text-white transition-colors p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
-                  Ready to make your users click and your CFO smile? 
-                  <span className="text-white underline decoration-dotted underline-offset-4 inline-block transition-transform group-hover:translate-x-1">Let's talk</span>
+                <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:800ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
+                  I work end to end, and I build. My portfolio and three MVPs are React and Tailwind, shipped with AI tooling. I'm not an engineer, but I can take an idea to something running and talk implementation with the people who build it.
+                </p>
+                <p className="text-xl font-medium text-white/90 leading-relaxed animate-fade-in [animation-delay:1000ms] hover:text-white transition-colors p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
+                  Munich, EU passport, working remotely for the past four years.
+                </p>
+                <p className="text-xl font-medium text-white/90 leading-relaxed animate-fade-in [animation-delay:1200ms] hover:text-white transition-colors p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
+                  Ready to make your users click and your CFO smile?{" "}
+                  <Link
+                    to="/contact"
+                    className="text-white underline decoration-dotted underline-offset-4 inline-block transition-transform hover:translate-x-1 relative z-20"
+                  >
+                    Let&apos;s talk
+                  </Link>
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-fade-in [animation-delay:1000ms]">
+              <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-fade-in [animation-delay:1400ms]">
                 <button 
                   onClick={handleDownload}
                   disabled={downloadState !== 'idle'}
@@ -190,34 +198,22 @@ export function About() {
 
         <div className="mb-24">
           <h2 className="text-3xl font-bold mb-12">Skills & Expertise</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {skills.map((skill, index) => (
-              <div 
-                key={index}
-                className="bg-neutral-900 rounded-2xl p-6 hover:bg-neutral-800 transition-all duration-300 group cursor-pointer"
-                onMouseEnter={() => setActiveSkill(index)}
-                onMouseLeave={() => setActiveSkill(null)}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {skillGroups.map((group) => (
+              <div
+                key={group.title}
+                className="bg-neutral-900 rounded-2xl p-6 hover:bg-neutral-800 transition-all duration-300"
               >
-                <div className="flex justify-between items-center mb-4">
-                  <p className="text-lg font-medium">{skill.name}</p>
-                  <span className="text-sm text-white/40">{skill.level}%</span>
-                </div>
-                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-white transition-all duration-700 ease-out"
-                    style={{ 
-                      width: isMobile 
-                        ? `${skill.level}%`  // Show actual skill level on mobile
-                        : activeSkill === index 
-                          ? `${skill.level}%`  // Show on hover for desktop
-                          : '0%',
-                      opacity: isMobile 
-                        ? 1  // Full opacity on mobile
-                        : activeSkill === index 
-                          ? 1  // Full opacity on hover for desktop
-                          : 0.3
-                    }}
-                  />
+                <h3 className="text-lg font-medium mb-4">{group.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="bg-black/30 rounded-xl px-3 py-1.5 text-sm text-white/80"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}
@@ -228,32 +224,16 @@ export function About() {
           <h2 className="text-3xl font-bold mb-12">Experience</h2>
           <div className="space-y-6">
             {experiences.map((exp, index) => (
-              <div 
+              <div
                 key={index}
-                className="bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800 transition-all duration-300 cursor-pointer group"
-                onMouseEnter={() => setActiveExp(index)}
-                onMouseLeave={() => setActiveExp(null)}
+                className="bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800 transition-all duration-300 group"
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                   <h3 className="text-2xl font-bold mb-2 md:mb-0 group-hover:text-white transition-colors">{exp.role}</h3>
                   <p className="text-white/60">{exp.year}</p>
                 </div>
                 <p className="text-xl text-white/80 mb-4 group-hover:text-white transition-colors">{exp.company}</p>
-                <p className="text-white/60 mb-6">{exp.description}</p>
-                
-                <div className={`space-y-3 transition-all duration-500 ${
-                  activeExp === index ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0 overflow-hidden'
-                }`}>
-                  {exp.achievements.map((achievement, achIndex) => (
-                    <div 
-                      key={achIndex}
-                      className="flex items-center gap-3 text-sm text-white/80"
-                    >
-                      <ArrowUpRight className="w-4 h-4" />
-                      <span>{achievement}</span>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-white/60">{exp.description}</p>
               </div>
             ))}
           </div>
