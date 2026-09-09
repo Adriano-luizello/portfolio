@@ -220,7 +220,10 @@ function CoverMedia({
 
     return (
       <video autoPlay loop muted playsInline className="w-full">
-        <source src={coverVideo} type="video/quicktime" />
+        <source
+          src={coverVideo}
+          type={coverVideo.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'}
+        />
         <img src={coverImage} alt={`${title} cover`} className="w-full" />
       </video>
     );

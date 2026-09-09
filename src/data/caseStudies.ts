@@ -22,7 +22,7 @@ export const caseStudies: CaseStudyNavItem[] = [
   {
     slug: 'lemans',
     title: 'Le Mans',
-    subtitle: 'Luxury Rentals, Simplified',
+    subtitle: 'My first product, seen with today\'s eyes',
     path: '/case-studies/lemans',
     image: '/images/lemans/card.png',
     hoverImage: '/images/lemans/cardhover.png',
