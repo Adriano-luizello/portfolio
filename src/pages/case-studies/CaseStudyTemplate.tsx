@@ -286,20 +286,20 @@ function SectionImages({ images }: { images: CaseImage[] }) {
 function NarrativeSectionBlock({ section }: { section: NarrativeSection }) {
   return (
     <section className="mb-20">
-      <h2 className="text-3xl font-bold mb-6 max-w-[70ch]">{section.heading}</h2>
+      <h2 className="text-3xl font-bold mb-6">{section.heading}</h2>
       {section.leadIn && (
-        <p className="italic text-lg text-white/70 mb-6 max-w-[70ch] leading-relaxed">
+        <p className="italic text-xl text-white/70 mb-6 leading-relaxed">
           {section.leadIn}
         </p>
       )}
-      <div className="space-y-6 max-w-[70ch]">
+      <div className="space-y-6">
         {section.paragraphs.map((paragraph, index) => (
           <p
             key={`${section.heading}-${index}`}
             className={
               isInlineLeadIn(paragraph)
-                ? 'italic text-lg text-white/70 leading-relaxed'
-                : 'text-lg text-white/80 leading-relaxed'
+                ? 'italic text-xl text-white/70 leading-relaxed'
+                : 'text-xl text-white/80 leading-relaxed'
             }
           >
             {paragraph}
@@ -331,15 +331,15 @@ function NarrativeCaseStudy({
       )}
 
       <div className="mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 max-w-[70ch] leading-tight">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
           {props.title}
         </h1>
         {props.subtitle && (
-          <p className="text-xl text-white/60 mb-6 max-w-[70ch] leading-relaxed">
+          <p className="text-xl text-white/60 mb-6 leading-relaxed">
             {props.subtitle}
           </p>
         )}
-        <p className="text-lg text-white/80 mb-12 max-w-[70ch] leading-relaxed">
+        <p className="text-lg text-white/80 mb-12 leading-relaxed">
           {props.metaLine}
         </p>
         <div className="rounded-3xl overflow-hidden bg-neutral-900">
@@ -352,14 +352,14 @@ function NarrativeCaseStudy({
       </div>
 
       {props.confidentialityNote && (
-        <p className="text-sm text-white/40 mb-12 max-w-[70ch] leading-relaxed">
+        <p className="text-sm text-white/40 mb-12 leading-relaxed">
           {props.confidentialityNote}
         </p>
       )}
 
       <section className="mb-20">
         <h2 className="text-3xl font-bold mb-6">In short</h2>
-        <p className="text-xl leading-loose text-white/80 max-w-[70ch]">
+        <p className="text-2xl leading-relaxed text-white/80">
           {props.inShort}
         </p>
       </section>
@@ -373,9 +373,9 @@ function NarrativeCaseStudy({
           {props.outcome.areProjected ? 'Projected results' : 'Outcome'}
         </h2>
         {props.outcome.intro && (
-          <div className="space-y-6 max-w-[70ch]">
+          <div className="space-y-6">
             {props.outcome.intro.split(/\n\n+/).map((paragraph, index) => (
-              <p key={index} className="text-lg text-white/80 leading-relaxed">
+              <p key={index} className="text-xl text-white/80 leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -410,7 +410,7 @@ function NarrativeCaseStudy({
           </div>
         )}
         {props.outcome.note && (
-          <p className="text-lg text-white/80 mt-6 max-w-[70ch] leading-relaxed">
+          <p className="text-xl text-white/80 mt-6 leading-relaxed">
             {props.outcome.note}
           </p>
         )}
