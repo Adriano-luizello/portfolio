@@ -4,16 +4,16 @@ const caseStudyData: NarrativeCase = {
   kind: 'narrative',
   title: 'Bible+: designing an app around content that was never tested',
   metaLine:
-    'Lead Product Designer · 3 months · with 1 junior designer, 3 developers and the founders',
+    'Lead Product Designer · 3 months · with 1 junior designer and the founders',
   coverImage: '/images/bibleplus/card.png',
   coverVideo: '/images/bibleplus/cover.mp4',
   inShort:
-    'A VP at Rede Record, one of Brazil\'s largest TV networks, invited me to design a Bible study app that wouldn\'t feel dogmatic. The idea at its center was "18 minutos": audio-drama episodes about books of the Bible, produced by a creative partner with professional actors and screenwriters. I led the design with a junior designer: research, information architecture, the design system and the interface. We took a brief that wanted everything and narrowed it to the features that carried the actual value. The app was fully designed and partially built, and never launched: the founders were waiting for an investor to fund episode production, and he didn\'t come. That outcome taught me more about product than most launches have.',
+    'A VP at Rede Record, one of Brazil\'s largest TV networks, invited me to design a Bible study app that wouldn\'t feel dogmatic. The idea at its center was "18 minutos": audio-drama episodes about books of the Bible, produced by a creative partner with professional actors and screenwriters. I led the design with a junior designer: research, information architecture, the design system and the interface. We took a brief that wanted everything and narrowed it to the features that carried the actual value. The app was fully designed and never launched: the founders were waiting for an investor to fund episode production, and he didn\'t come. That outcome taught me more about product than most launches have.',
   sections: [
     {
       heading: 'Context and my role',
       paragraphs: [
-        'The founders came from television. They knew how to produce, and their bet was that Scripture would reach a new audience if it sounded like a well-made drama rather than a sermon. My role was to turn that bet into a product: lead the design, run the market and competitor research with the junior designer, define the architecture, build the design system and design the screens. Development ran in parallel with three developers.',
+        'The founders came from television. They knew how to produce, and their bet was that Scripture would reach a new audience if it sounded like a well-made drama rather than a sermon. My role was to turn that bet into a product: lead the design, run the market and competitor research with the junior designer, define the architecture, build the design system and design the screens.',
       ],
       images: [
         {
@@ -79,7 +79,7 @@ const caseStudyData: NarrativeCase = {
   outcome: {
     areProjected: false,
     intro:
-      'The full app was designed: onboarding, home with the verse of the day, the 18-minute episodes and player, Bible reading with highlights and notes, journal, reminders and sharing, on a design system the developers built from. The core features went into development. The app never reached the stores: the founders chose to wait for investment to fund episode production, and as far as I followed the project, it didn\'t arrive.',
+      'The full app was designed: onboarding, home with the verse of the day, the 18-minute episodes and player, Bible reading with highlights and notes, journal, reminders and sharing, on a design system ready for handoff. The app never reached the stores: the founders chose to wait for investment to fund episode production, and as far as I followed the project, it didn\'t arrive.',
     note: 'There are no metrics to report and I won\'t invent any.',
     tiles: [
       {
