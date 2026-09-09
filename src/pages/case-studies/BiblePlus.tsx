@@ -1,134 +1,110 @@
-import { CaseStudyTemplate } from './CaseStudyTemplate';
+import { CaseStudyTemplate, type NarrativeCase } from './CaseStudyTemplate';
 
-// Custom Bible+ Hero Section
-function BiblePlusHero() {
-  return (
-    <div className="mb-24">
-      {/* Back Button */}
-      <a 
-        href="/"
-        className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-12 group"
-      >
-        <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5M12 19l-7-7 7-7" />
-        </svg>
-        Back to Work
-      </a>
-
-      <h1 className="text-5xl font-bold mb-6">Bible+: Designing Scripture for the TikTok Generation</h1>
-      <p className="text-xl text-white/60 mb-12">
-        Transforming biblical study into an engaging digital experience that resonates with modern audiences while preserving its sacred essence.
-      </p>
-      <div className="rounded-3xl overflow-hidden bg-neutral-900 -mx-4 sm:mx-0 relative">
-        <div className="scale-110 transform">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            className="w-full object-cover"
-          >
-            <source src="/images/bibleplus/cover.mp4" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-const caseStudyData = {
-  title: "Bible+: Designing Scripture for the TikTok Generation",
-  description: "Transforming biblical study into an engaging digital experience that resonates with modern audiences while preserving its sacred essence.",
-  role: "Lead Product Designer",
-  timeline: "3 months",
-  team: "2 Designers, 3 Developers",
-  technologies: ["React Native", "OpenAI", "Firebase", "TypeScript"],
-  coverImage: "/images/bibleplus/card.png",
-  problemStatement: "Let's face it—reading the Bible can feel like trying to assemble IKEA furniture without instructions. For modern users (especially younger ones), the 73-book tome was stuck in a paradox: universally revered but rarely finished. Our mission? Create Bible+, an app that makes scripture as engaging as a Netflix binge—without the heresy. Traditional Bible apps were either too preachy, soulless, or dry as desert sand. We needed to make scripture as engaging as social media—without compromising its essence.",
-  process: {
-    research: [
-      "Conducted competitor analysis of Glorify, Udemy, and 12min",
-      "Discovered users craved short-form audio (18min max) with historical context",
-      "Identified the sweet spot: TED Talk meets Game of Thrones",
-      "Analyzed user behavior patterns across different age groups"
-    ],
-    design: [
-      "Created 'Bible 18min': Podcast-style audio dramas for verse breakdowns",
-      "Developed mood-based search system for contextual verse discovery",
-      "Designed wizard-style onboarding for personalized reading plans",
-      "Implemented gamified tracking with shareable achievements"
-    ],
-    development: [
-      "Built modular system: Free core text + premium 'deep dives'",
-      "Integrated AI voiceovers and celebrity-narrated journeys",
-      "Developed separate tracks for scholarship and spirituality",
-      "Created shareable achievement system ('I survived Leviticus!')"
-    ]
-  },
-  challenges: [
-    "Making sacred text engaging without trivializing it",
-    "Balancing scholarly content with spiritual experience",
-    "Creating a tone that's both respectful and engaging",
-    "Designing features that appeal across different user segments"
-  ],
-  solutions: [
-    "Bible 18min: Podcast-style audio dramas breaking down verses",
-    "Mood-based search: 'Show me verses about anxiety' → instant playlist",
-    "Wizard onboarding: Personalized reading plans based on user goals",
-    "Gamified tracking with shareable achievements and progress bars"
-  ],
-  results: [
+const caseStudyData: NarrativeCase = {
+  kind: 'narrative',
+  title: 'Bible+: designing an app around content that was never tested',
+  metaLine:
+    'Lead Product Designer · 3 months · with 1 junior designer, 3 developers and the founders',
+  coverImage: '/images/bibleplus/card.png',
+  coverVideo: '/images/bibleplus/cover.mp4',
+  inShort:
+    'A VP at Rede Record, one of Brazil\'s largest TV networks, invited me to design a Bible study app that wouldn\'t feel dogmatic. The idea at its center was "18 minutos": audio-drama episodes about books of the Bible, produced by a creative partner with professional actors and screenwriters. I led the design with a junior designer: research, information architecture, the design system and the interface. We took a brief that wanted everything and narrowed it to the features that carried the actual value. The app was fully designed and partially built, and never launched: the founders were waiting for an investor to fund episode production, and he didn\'t come. That outcome taught me more about product than most launches have.',
+  sections: [
     {
-      metric: "Engagement",
-      value: "↑ 70%",
-      description: "Boost vs. traditional Bible apps"
+      heading: 'Context and my role',
+      paragraphs: [
+        'The founders came from television. They knew how to produce, and their bet was that Scripture would reach a new audience if it sounded like a well-made drama rather than a sermon. My role was to turn that bet into a product: lead the design, run the market and competitor research with the junior designer, define the architecture, build the design system and design the screens. Development ran in parallel with three developers.',
+      ],
+      images: [
+        {
+          src: '/images/bibleplus/final-1.png',
+          bare: true,
+          caption:
+            'Home and sign-in: the verse of the day, then the episodes. The app opens on content, not on a menu',
+        },
+        {
+          src: '/images/bibleplus/wireframe-2.png',
+          caption:
+            'Benchmark notes from the research phase: what audio-plus-text readers did well, and what we should borrow',
+        },
+      ],
     },
     {
-      metric: "Session Duration",
-      value: "2x",
-      description: "Longer session times due to 'one more chapter' effect"
+      heading: 'Narrowing the scope',
+      paragraphs: [
+        'The first brief listed everything at once: the 18-minute episodes, learning tracks, Bible reading with highlighting and synced audio, notes and journal, reminders, sharing. Every feature had a reason, and together they made an app nobody would understand on first open.',
+        'With the junior designer I mapped the competitors (Glorify, YouVersion-style readers, audio-learning apps like 12min) and ran conversations with religious users about how they actually read and listen. The pattern was clear: people wanted short audio with context, and a place to keep what they\'d read. That gave us a hierarchy. The episodes were the core. Reading with notes was the companion. Everything else waited. The learning tracks were designed but never reached development, and that was the right call for the budget.',
+      ],
+      images: [
+        {
+          src: '/images/bibleplus/wireframe-1.jpg',
+          caption:
+            'The full flow map after the cut: episodes at the center, reading and notes alongside, everything else out of the main path',
+        },
+        {
+          src: '/images/bibleplus/final-2.png',
+          bare: true,
+          caption:
+            'The 18-minute episodes and the player: the product\'s core, one screen away from launch',
+        },
+      ],
     },
     {
-      metric: "User Diversity",
-      value: "↑ 85%",
-      description: "Expanded user base including atheists and writers"
-    }
+      heading: 'Tone without dogma',
+      paragraphs: [
+        'The hard design problem was tone. The client wanted the app to feel modern and open, not preachy, but this is sacred text for the audience, and "engaging" is one bad decision away from "trivializing". The direction we settled on was restraint: a calm, mostly monochrome interface, photography instead of iconography, no gamification of Scripture itself. Progress and reminders exist, but they\'re about the habit of reading, not about scoring the Bible.',
+      ],
+      images: [
+        {
+          src: '/images/bibleplus/final-3.png',
+          bare: true,
+          caption:
+            'Reading with highlights and notes: the text stays the focus, the tools stay quiet',
+        },
+        {
+          src: '/images/bibleplus/final-4.png',
+          bare: true,
+          caption:
+            'Journal and reminders: a habit, not a score',
+        },
+      ],
+    },
+    {
+      heading: 'Constraints',
+      paragraphs: [
+        'Content cost. Each episode was a full audio production with actors and writers, and the founders wouldn\'t lower the quality bar. That made the content expensive, which made the app dependent on outside money, which is what eventually stopped it. Three months for the whole product. And a client with strong opinions about features, which required patience more than argument.',
+      ],
+    },
   ],
-  resultsAreProjected: false,
-  images: {
-    wireframes: [
-      "/images/bibleplus/wireframe-1.jpg",
-      "/images/bibleplus/wireframe-2.png",
-      "/images/bibleplus/wireframe-3.png"
-    ].sort((a, b) => {
-      if (a.includes('wireframe-1')) return -1;
-      if (b.includes('wireframe-1')) return 1;
-      return 0;
-    }),
-    final: [
-      "/images/bibleplus/final-1.png",
-      "/images/bibleplus/final-2.png",
-      "/images/bibleplus/final-3.png",
-      "/images/bibleplus/final-4.png"
-    ]
+  outcome: {
+    areProjected: false,
+    intro:
+      'The full app was designed: onboarding, home with the verse of the day, the 18-minute episodes and player, Bible reading with highlights and notes, journal, reminders and sharing, on a design system the developers built from. The core features went into development. The app never reached the stores: the founders chose to wait for investment to fund episode production, and as far as I followed the project, it didn\'t arrive.',
+    note: 'There are no metrics to report and I won\'t invent any.',
+    tiles: [
+      {
+        metric: 'Fully designed in 3 months',
+        description: '',
+      },
+      {
+        metric: 'Scope cut to the core',
+        description: '',
+      },
+      {
+        metric: 'Never launched, and I know why',
+        description: '',
+      },
+    ],
   },
-  lessons: [
-    "Sacred texts need UX too if Duolingo can make Hebrew fun, so can we",
-    "Don't fear the niche: 'Bible entrepreneurs' became our unpaid marketers",
-    "Tone is everything: Serious content + playful delivery = theological TikTok"
-  ]
+  closing: {
+    heading: "What I'd do differently",
+    paragraphs: [
+      'I\'d test the content before building the app. Everything in Bible+ was built around the 18-minute episodes, and those episodes were never validated beyond the founders\' conviction. Today I\'d put the first episodes on YouTube and Spotify, where distribution is free and the audience is already there, and let the numbers decide whether an app was worth building at all.',
+      'The app was only ever an additional way to distribute that content, and we built the distribution before we had proof of the thing being distributed. That\'s the lesson I carry from this project, and it\'s the same one I apply to my own products now.',
+    ],
+  },
 };
 
 export function BiblePlusCaseStudy() {
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      {/* Custom Hero with Video */}
-      <BiblePlusHero />
-
-      {/* Rest of the case study content */}
-      <div className="mt-24">
-        <CaseStudyTemplate {...caseStudyData} skipHero={true} hideBackButton={true} />
-      </div>
-    </div>
-  );
-} 
+  return <CaseStudyTemplate {...caseStudyData} />;
+}

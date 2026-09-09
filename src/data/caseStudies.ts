@@ -31,7 +31,7 @@ export const caseStudies: CaseStudyNavItem[] = [
   {
     slug: 'bibleplus',
     title: 'Bible+',
-    subtitle: 'AI-Powered Bible Study App',
+    subtitle: 'An app built around content that was never tested',
     path: '/case-studies/bibleplus',
     image: '/images/bibleplus/card.png',
     hoverImage: '/images/bibleplus/cardhover.png',
