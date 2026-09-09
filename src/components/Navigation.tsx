@@ -8,7 +8,7 @@ export function Navigation() {
 
   const navItems = [
     { path: '/', icon: Home, label: 'Home' },
-    { path: '/services', icon: Briefcase, label: 'Services' },
+    { path: '/services', icon: Briefcase, label: 'How I work' },
     { path: '/about', icon: User, label: 'About' },
     { path: '/contact', icon: Mail, label: 'Contact' }
   ];

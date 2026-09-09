@@ -10,7 +10,7 @@ const caseStudyData: NarrativeCase = {
   confidentialityNote:
     'Screens shown are product interfaces from my work at Choreograph. Client data, campaign details and identifying information have been omitted.',
   inShort:
-    'At Choreograph, WPP\'s data and technology company, I own the design of Create Optimization, the product activation teams use to decide which ad goes to whom, where and when. The most significant thing I designed there is the Decision Tree: a visual way to build targeting strategies that replaced a rule-based workflow where nobody could see the whole strategy or which rule beat which. It\'s in production, used daily by global brands and their agencies, and the product\'s VP called it the most relevant launch of the last four years. The work that mattered most wasn\'t the tree itself; it was keeping it simple while an entire ad-tech organization wanted to add one more thing to it.',
+    'At Choreograph, WPP\'s data and technology company, I own the design of Create Optimization, the product activation teams use to decide which ad goes to whom, where and when. The most significant thing I designed there is the Decision Tree: a visual way to build targeting strategies that replaced a rule-based workflow where nobody could see the whole strategy or which rule beat which. It\'s in production, used daily by global brands and their agencies, and ==the product\'s VP called it the most relevant launch of the last four years==. The work that mattered most wasn\'t the tree itself; it was keeping it simple while an entire ad-tech organization wanted to add one more thing to it.',
   sections: [
     {
       heading: 'Context and my role',
@@ -29,7 +29,7 @@ const caseStudyData: NarrativeCase = {
     {
       heading: 'The problem: strategy you couldn\'t see',
       paragraphs: [
-        'Before the Decision Tree, targeting was set up with rules: a list of conditions and outcomes that behaved like a spreadsheet. It worked for small campaigns. At scale it had two failures that clients kept reporting. You couldn\'t see the strategy as a whole, only rows. And you couldn\'t tell which rule took precedence when two of them overlapped, which meant the wrong variant could reach the wrong audience and nobody would know until the report.',
+        'Before the Decision Tree, targeting was set up with rules: a list of conditions and outcomes that behaved like a spreadsheet. It worked for small campaigns. At scale it had two failures that clients kept reporting. You couldn\'t see the strategy as a whole, only rows. And ==you couldn\'t tell which rule took precedence when two of them overlapped==, which meant the wrong variant could reach the wrong audience and nobody would know until the report.',
         'The request from clients was "make it clearer". The design question was: clearer how?',
       ],
       images: [
@@ -44,7 +44,7 @@ const caseStudyData: NarrativeCase = {
     {
       heading: 'Why a tree',
       paragraphs: [
-        'A targeting strategy is a sequence of decisions: by location, then by audience, then by time or weather, ending in an ad variant. Drawn as a tree, precedence stops being a hidden property of the rules and becomes the shape of the diagram: whatever is upstream decides first. Overlaps become visible as branches. The whole strategy fits on one canvas, and the side panel shows the detail of whichever node you\'re on.',
+        'A targeting strategy is a sequence of decisions: by location, then by audience, then by time or weather, ending in an ad variant. Drawn as a tree, ==precedence stops being a hidden property of the rules and becomes the shape of the diagram==: whatever is upstream decides first. Overlaps become visible as branches. The whole strategy fits on one canvas, and the side panel shows the detail of whichever node you\'re on.',
         'We validated the direction in research with internal stakeholders, external clients and agencies in markets as different as Colombia and the Nordics. The tree read the same way everywhere, which is what a visual grammar for strategy needs to do.',
       ],
       images: [
@@ -65,7 +65,7 @@ const caseStudyData: NarrativeCase = {
       heading: 'Keeping it out of the cockpit',
       paragraphs: [
         'Ad tech has a lot of knobs, and every one of them has an owner who wants it visible. The biggest fight of this project was against the interface becoming an airplane cockpit. One example: tracker generation and tagging. The pressure was to put it in the top bar, always on. Trackers matter, but only at a specific moment in the flow, so I kept them inside the side panel, surfaced by context: they appear when you\'re on a node where they make sense, and stay out of the way otherwise. Same for inheritance: trackers set at the root flow down to the leaves automatically, so users set them once instead of on every variant.',
-        'None of the features were removed. They were placed where the task needed them, which is a different negotiation from "cut it".',
+        '==None of the features were removed. They were placed where the task needed them==, which is a different negotiation from "cut it".',
       ],
       images: [
         {
@@ -79,7 +79,7 @@ const caseStudyData: NarrativeCase = {
     {
       heading: 'Scaling past drag and drop',
       paragraphs: [
-        'The first versions had weak bulk actions, and it showed with real campaigns: a tree with dozens of cities and time slots meant dragging dozens of nodes. The fix came from how activation teams actually work. They already organize campaigns in spreadsheets, so we built a CSV import where the user maps their columns to the tree\'s dimensions and the tree builds itself: nodes created, targeting configured, ads assigned. The drag-and-drop stays for adjustments; the heavy lifting moved to a format the teams already had.',
+        'The first versions had weak bulk actions, and it showed with real campaigns: a tree with dozens of cities and time slots meant dragging dozens of nodes. The fix came from how activation teams actually work. They already organize campaigns in spreadsheets, so we built a CSV import where ==the user maps their columns to the tree\'s dimensions and the tree builds itself==: nodes created, targeting configured, ads assigned. The drag-and-drop stays for adjustments; the heavy lifting moved to a format the teams already had.',
       ],
       images: [
         {
@@ -140,7 +140,7 @@ const caseStudyData: NarrativeCase = {
   closing: {
     heading: "What I'd do differently",
     paragraphs: [
-      'I\'d have pushed the CSV import into the first release. We learned about the bulk problem from real campaigns, which is a good way to learn but a slow one, and the signal was already there in research: every team we talked to had a spreadsheet. I\'d also have set a rule earlier for what goes in the top bar, before the first request arrived, instead of negotiating each one.',
+      '==I\'d have pushed the CSV import into the first release.== We learned about the bulk problem from real campaigns, which is a good way to learn but a slow one, and the signal was already there in research: every team we talked to had a spreadsheet. I\'d also have set a rule earlier for what goes in the top bar, before the first request arrived, instead of negotiating each one.',
     ],
   },
 };

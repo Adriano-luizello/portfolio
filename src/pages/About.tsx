@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Linkedin, FileDown, Loader2, CheckCircle } from 'lucide-react';
+import { Reveal } from '../components/Reveal';
 
 export function About() {
   const [downloadState, setDownloadState] = useState<'idle' | 'loading' | 'success'>('idle');
@@ -28,8 +29,8 @@ export function About() {
   };
 
   const socialLinks = [
-    { icon: Instagram, href: "https://www.instagram.com/adrianoluizello/", color: "hover:text-pink-500" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/adrianoluizello/", color: "hover:text-blue-600" }
+    { icon: Instagram, href: "https://www.instagram.com/adrianoluizello/" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/adrianoluizello/" }
   ];
 
   const skillGroups = [
@@ -82,7 +83,7 @@ export function About() {
       role: "Product Designer",
       company: "Choreograph (WPP Group)",
       description:
-        "Enterprise SaaS platform for omnichannel media planning and activation. Led an 18-month redesign of a legacy, spreadsheet-based ad platform into a unified workflow, working alongside designers, engineers and product owners.",
+        "Enterprise SaaS for media planning and activation. I own the design of Create Optimization, the ads activation product, and designed the Decision Tree that replaced the rule-based targeting workflow. In production, used daily by global brands.",
     },
     {
       year: "2021 - Present",
@@ -106,44 +107,44 @@ export function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
           <div className="relative">
             <div className="md:sticky top-24">
-              <h1 className="text-4xl md:text-5xl font-bold mb-12 transform transition-all duration-500 hover:scale-105 animate-fade-in whitespace-nowrap">
-                Product Designer
+              <h1 className="font-display font-medium text-5xl md:text-7xl tracking-tight mb-12 leading-[1.05]">
+                Senior Product Designer
               </h1>
-              <div className="space-y-8">
-                <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:200ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
+              <div className="space-y-6">
+                <p className="text-2xl text-white/85 leading-relaxed">
                   I'm a product designer who came to design from the business side.
                 </p>
-                <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:400ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
-                  Before this I spent ten years in business development and founded two companies, which is why I start from the commercial problem rather than the interface. If a design doesn't move adoption, retention or revenue, it's decoration.
+                <p className="text-xl text-white/70 leading-relaxed">
+                  Before this I spent ten years in business development and founded two companies, which is why I start from the commercial problem rather than the interface. <mark>If a design doesn't move adoption, retention or revenue, it's decoration.</mark>
                 </p>
-                <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:600ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
+                <p className="text-xl text-white/70 leading-relaxed">
                   Most of my work happens where the constraints are real. A pension fund onboarding flow wrapped in legal verification requirements and a backend that only accepted PDFs. A legal tech platform where terminology couldn't be simplified freely. An enterprise ad platform under privacy compliance. In each one the job was the same: work out which friction is doing real work, and remove the rest without breaking anything.
                 </p>
-                <p className="text-xl text-white/70 leading-relaxed transition-all duration-300 hover:text-white/90 animate-fade-in [animation-delay:800ms] p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
+                <p className="text-xl text-white/70 leading-relaxed">
                   I work end to end, and I build. My portfolio and three MVPs are React and Tailwind, shipped with AI tooling. I'm not an engineer, but I can take an idea to something running and talk implementation with the people who build it.
                 </p>
-                <p className="text-xl font-medium text-white/90 leading-relaxed animate-fade-in [animation-delay:1000ms] hover:text-white transition-colors p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
+                <p className="text-xl text-white/70 leading-relaxed">
                   Munich, EU passport, working remotely for the past four years.
                 </p>
-                <p className="text-xl font-medium text-white/90 leading-relaxed animate-fade-in [animation-delay:1200ms] hover:text-white transition-colors p-4 rounded-xl hover:-translate-y-1 hover:bg-white/5 cursor-default group">
-                  Ready to make your users click and your CFO smile?{" "}
+                <p className="text-xl text-white/90 leading-relaxed">
+                  Working on something like this?{" "}
                   <Link
                     to="/contact"
-                    className="text-white underline decoration-dotted underline-offset-4 inline-block transition-transform hover:translate-x-1 relative z-20"
+                    className="text-primary hover:underline underline-offset-4"
                   >
-                    Let&apos;s talk
+                    Let&apos;s talk &rarr;
                   </Link>
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 mt-12 animate-fade-in [animation-delay:1400ms]">
+              <div className="flex flex-col sm:flex-row gap-4 mt-12">
                 <button 
                   onClick={handleDownload}
                   disabled={downloadState !== 'idle'}
                   className={`group flex items-center justify-center gap-2 px-6 py-3 rounded-full transition-all duration-300 ${
                     downloadState === 'idle' 
-                      ? 'bg-white text-black hover:bg-white/90' 
+                      ? 'bg-primary text-black hover:bg-primary/90 font-medium' 
                       : downloadState === 'loading'
-                      ? 'bg-white/80 text-black cursor-wait'
+                      ? 'bg-primary/80 text-black cursor-wait'
                       : 'bg-green-500 text-white'
                   }`}
                 >
@@ -173,7 +174,7 @@ export function About() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm ${social.color} transition-all duration-300 hover:scale-110 hover:bg-white/20`}
+                      className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200"
                     >
                       <social.icon className="w-5 h-5" />
                     </a>
@@ -184,60 +185,54 @@ export function About() {
           </div>
           <div className="relative pt-[140px]">
             <div className="relative group w-full">
-              <div className="absolute -inset-2 bg-gradient-to-r from-pink-500 to-blue-500 rounded-[22px] opacity-0 group-hover:opacity-75 transition-all duration-700 blur-xl group-hover:blur-2xl"></div>
               <div className="relative">
                 <img 
                   src="/images/profile/profile.jpg"
                   alt="Adriano Luizello"
-                  className="w-full h-[400px] md:h-[900px] object-cover object-[center_15%] rounded-3xl transform transition-all duration-700 group-hover:scale-[1.01] animate-fade-in [animation-delay:200ms]"
+                  className="w-full h-[400px] md:h-[900px] object-cover object-[center_15%] rounded-3xl"
                 />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mb-24">
-          <h2 className="text-3xl font-bold mb-12">Skills & Expertise</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-            {skillGroups.map((group) => (
-              <div
-                key={group.title}
-                className="bg-neutral-900 rounded-2xl p-6 hover:bg-neutral-800 transition-all duration-300"
-              >
-                <h3 className="text-lg font-medium mb-4">{group.title}</h3>
-                <div className="flex flex-wrap gap-2">
+        <section className="mb-24">
+          <h2 className="font-display font-medium text-4xl md:text-5xl tracking-tight mb-10">Skills & Expertise</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-10 gap-y-12 border-t border-white/10 pt-10">
+            {skillGroups.map((group, index) => (
+              <Reveal key={group.title} delay={index * 0.06}>
+                <h3 className="font-display text-3xl text-primary mb-4">{group.title}</h3>
+                <ul className="space-y-2">
                   {group.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="bg-black/30 rounded-xl px-3 py-1.5 text-sm text-white/80"
-                    >
+                    <li key={skill} className="text-lg text-white/75">
                       {skill}
-                    </span>
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </Reveal>
             ))}
           </div>
-        </div>
+        </section>
 
-        <div>
-          <h2 className="text-3xl font-bold mb-12">Experience</h2>
-          <div className="space-y-6">
+        <section>
+          <h2 className="font-display font-medium text-4xl md:text-5xl tracking-tight mb-10">Experience</h2>
+          <div className="border-t border-white/10">
             {experiences.map((exp, index) => (
-              <div
+              <Reveal
                 key={index}
-                className="bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800 transition-all duration-300 group"
+                delay={index * 0.06}
+                className="grid grid-cols-1 md:grid-cols-12 gap-6 py-10 border-b border-white/10"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-2xl font-bold mb-2 md:mb-0 group-hover:text-white transition-colors">{exp.role}</h3>
-                  <p className="text-white/60">{exp.year}</p>
+                <p className="md:col-span-2 text-primary">{exp.year}</p>
+                <div className="md:col-span-4">
+                  <h3 className="font-display font-medium text-3xl leading-tight">{exp.role}</h3>
+                  <p className="text-lg text-white/60 mt-1">{exp.company}</p>
                 </div>
-                <p className="text-xl text-white/80 mb-4 group-hover:text-white transition-colors">{exp.company}</p>
-                <p className="text-white/60">{exp.description}</p>
-              </div>
+                <p className="md:col-span-6 text-lg text-white/75 leading-relaxed">{exp.description}</p>
+              </Reveal>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

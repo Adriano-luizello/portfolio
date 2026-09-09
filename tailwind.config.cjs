@@ -6,6 +6,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#F5C542',
+      },
+      fontFamily: {
+        display: ['Melodrama', 'Georgia', 'serif'],
+        sans: ['Nunito', 'Inter', 'system-ui', 'sans-serif'],
+      },
       transformStyle: {
         '3d': 'preserve-3d',
       },

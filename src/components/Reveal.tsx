@@ -37,12 +37,12 @@ export function DrawLine({ delay = 0 }: { delay?: number }) {
   const reduce = useReducedMotion();
 
   if (reduce) {
-    return <div className="h-px w-8 bg-white/30 mt-2" />;
+    return <div className="h-px w-8 bg-primary/60 mt-2" />;
   }
 
   return (
     <motion.div
-      className="h-px w-8 bg-white/40 mt-2 origin-left"
+      className="h-px w-8 bg-primary mt-2 origin-left"
       initial={{ scaleX: 0 }}
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true }}

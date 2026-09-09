@@ -32,7 +32,7 @@ export function Home() {
   const projects: HomeProject[] = [
     {
       title: "ADRIANO\nLUIZELLO",
-      role: "Product Designer",
+      role: "Senior Product Designer",
       color: "bg-gradient-to-br from-neutral-50 to-neutral-100",
       textColor: "text-black"
     },
@@ -76,10 +76,10 @@ export function Home() {
                   {/* Hover Title */}
                   <div className={`absolute top-8 left-8 ${!isMobile ? 'opacity-0 group-hover:opacity-100' : ''} transition-all duration-700 delay-100 z-30`}>
                     <div>
-                      <h1 className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-neutral-800">
+                      <h1 className="font-display font-medium text-4xl md:text-5xl leading-[1.05] tracking-tight text-neutral-800">
                         ADRIANO<br />LUIZELLO
                       </h1>
-                      <p className="mt-2 text-neutral-600">Product Designer</p>
+                      <p className="mt-2 text-neutral-600">Senior Product Designer</p>
                     </div>
                   </div>
                 </>
@@ -131,7 +131,7 @@ export function Home() {
                     {index === 0 ? (
                       <>
                         {project.title.split('\n').map((line, i) => (
-                          <h1 key={i} className="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-neutral-800">
+                          <h1 key={i} className="font-display font-medium text-4xl md:text-5xl leading-[1.05] tracking-tight text-neutral-800">
                             {line}
                           </h1>
                         ))}
@@ -139,7 +139,7 @@ export function Home() {
                       </>
                     ) : (
                       <>
-                        <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-2">
+                        <h2 className="font-display font-medium text-3xl md:text-4xl tracking-tight mb-2">
                           {project.title}
                         </h2>
                         {project.subtitle && (

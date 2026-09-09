@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Phone, Send, Loader2, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
+import { Send, Loader2, CheckCircle, AlertCircle, AlertTriangle } from 'lucide-react';
 
 type FormData = {
   name: string;
@@ -154,11 +154,11 @@ export function Contact() {
 
   const getInputClassName = (error?: string) => `
     w-full px-4 py-3 bg-white/5 rounded-xl border 
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900 
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black 
     transition-all duration-200 
     ${error 
       ? 'border-red-500/50 focus:border-red-500 focus:ring-red-500/20' 
-      : 'border-white/10 focus:border-white/20 focus:ring-white/10'
+      : 'border-white/10 focus:border-primary/60 focus:ring-primary/20'
     }
   `;
 
@@ -169,51 +169,34 @@ export function Contact() {
           {/* Contact Information */}
           <div className="space-y-8 sm:space-y-12">
             <div>
-              <h1 className="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6">Let's Talk</h1>
-              <p className="text-lg sm:text-xl text-white/60">
-                Have a project in mind? Let's create something extraordinary together.
+              <h1 className="font-display font-medium text-5xl sm:text-7xl tracking-tight mb-4 sm:mb-6">Let's Talk</h1>
+              <p className="text-xl sm:text-2xl text-white/80 leading-relaxed">
+                A product team looking for a designer who ships, or a founder with something to build: tell me what you're working on.
               </p>
             </div>
 
-            <div className="space-y-6 sm:space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="p-3 sm:p-4 bg-white/10 rounded-xl sm:rounded-2xl">
-                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Location</h3>
-                  <p className="text-white/60">Munich, Germany</p>
-                </div>
+            <div className="border-t border-white/10">
+              <div className="py-6 border-b border-white/10">
+                <p className="text-sm uppercase tracking-wider text-white/40 mb-1">Location</p>
+                <p className="text-xl">Munich, Germany</p>
               </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 sm:p-4 bg-white/10 rounded-xl sm:rounded-2xl">
-                  <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Email</h3>
-                  <a href="mailto:aluizello@gmail.com" className="text-white/60 hover:text-white transition-colors">
-                    aluizello@gmail.com
-                  </a>
-                </div>
+              <div className="py-6 border-b border-white/10">
+                <p className="text-sm uppercase tracking-wider text-white/40 mb-1">Email</p>
+                <a href="mailto:aluizello@gmail.com" className="text-xl hover:text-primary transition-colors">
+                  aluizello@gmail.com
+                </a>
               </div>
-
-              <div className="flex items-start gap-4">
-                <div className="p-3 sm:p-4 bg-white/10 rounded-xl sm:rounded-2xl">
-                  <Phone className="w-5 h-5 sm:w-6 sm:h-6" />
-                </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Phone</h3>
-                  <a href="tel:+393498448669" className="text-white/60 hover:text-white transition-colors">
-                    +39 349 844 8669
-                  </a>
-                </div>
+              <div className="py-6 border-b border-white/10">
+                <p className="text-sm uppercase tracking-wider text-white/40 mb-1">Phone</p>
+                <a href="tel:+393498448669" className="text-xl hover:text-primary transition-colors">
+                  +39 349 844 8669
+                </a>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="bg-neutral-900 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/5">
+          <div className="rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/10">
             <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6" noValidate>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">
@@ -347,10 +330,10 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 py-3.5 bg-white text-black rounded-xl hover:bg-white/90 
+                className="w-full px-6 py-3.5 bg-primary text-black rounded-full hover:bg-primary/90 
                   transition-all duration-200 flex items-center justify-center gap-2 group 
-                  disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white
-                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-neutral-900 focus:ring-white/20
+                  disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary
+                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-primary/30
                   active:scale-[0.98] transform text-base sm:text-lg font-medium"
               >
                 {isSubmitting ? (

@@ -297,7 +297,7 @@ function NarrativeSectionBlock({ section }: { section: NarrativeSection }) {
   return (
     <section className="mb-20">
       <Reveal>
-      <h2 className="text-3xl font-bold mb-6">{section.heading}</h2>
+      <h2 className="font-display font-medium text-4xl md:text-5xl tracking-tight mb-6">{section.heading}</h2>
       {section.leadIn && (
         <p className="italic text-xl text-white/70 mb-6 leading-relaxed">
           {section.leadIn}
@@ -313,7 +313,7 @@ function NarrativeSectionBlock({ section }: { section: NarrativeSection }) {
                 : 'text-xl text-white/80 leading-relaxed'
             }
           >
-            {paragraph}
+            {renderInline(paragraph)}
           </p>
         ))}
       </div>
@@ -343,7 +343,7 @@ function NarrativeCaseStudy({
       )}
 
       <div className="mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        <h1 className="font-display font-medium text-5xl md:text-7xl tracking-tight mb-6 leading-[1.05]">
           {props.title}
         </h1>
         {props.subtitle && (
@@ -370,9 +370,9 @@ function NarrativeCaseStudy({
       )}
 
       <section className="mb-20">
-        <h2 className="text-3xl font-bold mb-6">In short</h2>
+        <h2 className="font-display font-medium text-4xl md:text-5xl tracking-tight mb-6">In short</h2>
         <p className="text-2xl leading-relaxed text-white/80">
-          {props.inShort}
+          {renderInline(props.inShort)}
         </p>
       </section>
 
@@ -381,49 +381,39 @@ function NarrativeCaseStudy({
       ))}
 
       <section className="mb-20">
-        <h2 className="text-3xl font-bold mb-6">
+        <h2 className="font-display font-medium text-4xl md:text-5xl tracking-tight mb-6">
           {props.outcome.areProjected ? 'Projected results' : 'Outcome'}
         </h2>
         {props.outcome.intro && (
           <div className="space-y-6">
             {props.outcome.intro.split(/\n\n+/).map((paragraph, index) => (
               <p key={index} className="text-xl text-white/80 leading-relaxed">
-                {paragraph}
+                {renderInline(paragraph)}
               </p>
             ))}
           </div>
         )}
         {props.outcome.images && <SectionImages images={props.outcome.images} />}
         {props.outcome.tiles && props.outcome.tiles.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10 border-t border-white/10 pt-8">
             {props.outcome.tiles.map((result) => (
-              <div
-                key={result.metric}
-                className="bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800 transition-all duration-300"
-              >
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center mb-6">
-                    {result.value ? (
-                      <Trophy className="w-6 h-6 text-white/80" />
-                    ) : (
-                      <CheckCircle2 className="w-6 h-6 text-white/60" />
-                    )}
-                  </div>
-                  {result.value ? (
-                    <div className="text-4xl font-bold mb-4 text-center">{result.value}</div>
-                  ) : null}
-                  <h3 className="text-xl font-bold mb-3 text-center">{result.metric}</h3>
-                  {result.description && (
-                    <p className="text-white/60 text-center">{result.description}</p>
-                  )}
-                </div>
+              <div key={result.metric}>
+                {result.value ? (
+                  <div className="font-display text-5xl text-primary mb-2">{result.value}</div>
+                ) : null}
+                <p className={result.value ? 'text-lg text-white/80' : 'font-display text-3xl md:text-4xl text-primary leading-tight'}>
+                  {result.metric}
+                </p>
+                {result.description && (
+                  <p className="text-white/50 mt-2">{result.description}</p>
+                )}
               </div>
             ))}
           </div>
         )}
         {props.outcome.note && (
           <p className="text-xl text-white/80 mt-6 leading-relaxed">
-            {props.outcome.note}
+            {renderInline(props.outcome.note)}
           </p>
         )}
       </section>
@@ -432,6 +422,18 @@ function NarrativeCaseStudy({
 
       <AdjacentNav adjacent={adjacent} />
     </div>
+  );
+}
+
+/** Renders ==highlighted== spans inside a paragraph as <mark>. */
+function renderInline(text: string) {
+  const parts = text.split(/(==[^=]+==)/g);
+  return parts.map((part, i) =>
+    part.startsWith('==') && part.endsWith('==') ? (
+      <mark key={i}>{part.slice(2, -2)}</mark>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
   );
 }
 
