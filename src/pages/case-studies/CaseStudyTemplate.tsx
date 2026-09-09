@@ -77,6 +77,8 @@ export type ChecklistCase = { kind: 'checklist' } & ChecklistCaseFields;
 export type CaseImage = {
   src: string;
   caption?: string;
+  /** Skip the rounded corners, for assets that already carry their own frame (browser mockups). */
+  bare?: boolean;
 };
 
 export type NarrativeSection = {
@@ -234,13 +236,15 @@ function ImageFigure({
   image: CaseImage;
   matchSize?: boolean;
 }) {
-  // Product shots: fixed 1152/700 box, contain. Sketch trios: fixed 3/2 box, cover so cells match.
+  // Product shots: full content width, natural height, never cropped. Sketch trios: fixed 3/2 box so cells match.
   const frameClass = matchSize
     ? 'relative aspect-[3/2] w-full overflow-hidden rounded-2xl'
-    : 'relative aspect-[1152/700] w-full';
+    : 'w-full';
   const imageClass = matchSize
     ? 'absolute inset-0 h-full w-full object-cover'
-    : 'absolute inset-0 m-auto max-h-full max-w-full object-contain rounded-2xl';
+    : image.bare
+      ? 'block w-full h-auto'
+      : 'block w-full h-auto rounded-2xl';
 
   return (
     <figure className="w-full flex flex-col">

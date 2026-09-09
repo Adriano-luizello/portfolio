@@ -13,7 +13,7 @@ export const caseStudies: CaseStudyNavItem[] = [
   {
     slug: 'petros',
     title: 'Petros',
-    subtitle: 'From Pension Paperwork to One-Click Magic',
+    subtitle: 'A pension signup people can finish in one sitting',
     path: '/case-studies/petros',
     image: '/images/petros/card.png',
     hoverImage: '/images/petros/cardhover.png',
@@ -49,7 +49,7 @@ export const caseStudies: CaseStudyNavItem[] = [
   {
     slug: 'pepperlaw',
     title: 'PepperLaw',
-    subtitle: 'AI Legal Tech Made Surprisingly Simple',
+    subtitle: 'From a sold promise to a product in one month',
     path: '/case-studies/pepperlaw',
     image: '/images/pepperlaw/card.png',
     hoverImage: '/images/pepperlaw/cardhover.png',
