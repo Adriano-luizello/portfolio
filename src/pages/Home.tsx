@@ -74,7 +74,7 @@ export function Home() {
                     <TrailAnimation />
                   </div>
                   {/* Hover Title */}
-                  <div className={`absolute top-8 left-8 ${!isMobile ? 'opacity-0 group-hover:opacity-100' : ''} transition-all duration-700 delay-100 z-30`}>
+                  <div className="absolute top-8 left-8 hidden md:block opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 z-30">
                     <div>
                       <h1 className="font-display font-medium text-4xl md:text-5xl leading-[1.05] tracking-tight text-neutral-800">
                         ADRIANO<br />LUIZELLO
@@ -117,11 +117,17 @@ export function Home() {
                 </div>
               )}
               
+              {/* Mobile legibility: darken the bottom where the text sits */}
+              {index !== 0 && (
+                <div className={`absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent md:hidden z-[5]
+                  ${activeCardIndex === index ? 'opacity-0' : 'opacity-100'} transition-opacity duration-700`} />
+              )}
+
               {/* Content */}
-              <div className="relative z-10 h-full p-8">
-                <div className="h-full flex flex-col">
+              <div className="relative z-10 h-full p-6 md:p-8">
+                <div className={`h-full flex flex-col ${index === 0 ? '' : 'justify-end md:justify-start'}`}>
                   <div className={`
-                    ${index === 0 ? '' : 'max-w-[65%]'} 
+                    ${index === 0 ? '' : 'md:max-w-[65%]'} 
                     transition-opacity duration-700 
                     ${!isMobile 
                       ? 'group-hover:opacity-0'

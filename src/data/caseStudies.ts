@@ -11,6 +11,15 @@ export type CaseStudyNavItem = {
 /** Display order matches the home bento grid (excluding the identity card). */
 export const caseStudies: CaseStudyNavItem[] = [
   {
+    slug: 'choreograph',
+    title: 'Choreograph',
+    subtitle: 'Ad targeting as a map instead of a rulebook',
+    path: '/case-studies/choreograph',
+    image: '/images/choreograph/card.png',
+    hoverImage: '/images/choreograph/cardhover.png',
+    color: 'bg-[#2A2A2A]',
+  },
+  {
     slug: 'petros',
     title: 'Petros',
     subtitle: 'A pension signup people can finish in one sitting',
@@ -20,13 +29,13 @@ export const caseStudies: CaseStudyNavItem[] = [
     color: 'bg-neutral-900',
   },
   {
-    slug: 'lemans',
-    title: 'Le Mans',
-    subtitle: 'My first product, seen with today\'s eyes',
-    path: '/case-studies/lemans',
-    image: '/images/lemans/card.png',
-    hoverImage: '/images/lemans/cardhover.png',
-    color: 'bg-[#1A1A1A]',
+    slug: 'pepperlaw',
+    title: 'PepperLaw',
+    subtitle: 'From a sold promise to a product in one month',
+    path: '/case-studies/pepperlaw',
+    image: '/images/pepperlaw/card.png',
+    hoverImage: '/images/pepperlaw/cardhover.png',
+    color: 'bg-[#1E1E1E]',
   },
   {
     slug: 'bibleplus',
@@ -38,22 +47,13 @@ export const caseStudies: CaseStudyNavItem[] = [
     color: 'bg-[#2D3648]',
   },
   {
-    slug: 'choreograph',
-    title: 'Choreograph',
-    subtitle: 'Ad targeting as a map instead of a rulebook',
-    path: '/case-studies/choreograph',
-    image: '/images/choreograph/card.png',
-    hoverImage: '/images/choreograph/cardhover.png',
-    color: 'bg-[#2A2A2A]',
-  },
-  {
-    slug: 'pepperlaw',
-    title: 'PepperLaw',
-    subtitle: 'From a sold promise to a product in one month',
-    path: '/case-studies/pepperlaw',
-    image: '/images/pepperlaw/card.png',
-    hoverImage: '/images/pepperlaw/cardhover.png',
-    color: 'bg-[#1E1E1E]',
+    slug: 'lemans',
+    title: 'Le Mans',
+    subtitle: 'My first product, seen with today\'s eyes',
+    path: '/case-studies/lemans',
+    image: '/images/lemans/card.png',
+    hoverImage: '/images/lemans/cardhover.png',
+    color: 'bg-[#1A1A1A]',
   },
 ];
 
