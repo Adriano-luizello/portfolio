@@ -40,7 +40,7 @@ export const caseStudies: CaseStudyNavItem[] = [
   {
     slug: 'choreograph',
     title: 'Choreograph',
-    subtitle: 'The Omnichannel Revolution',
+    subtitle: 'Ad targeting as a map instead of a rulebook',
     path: '/case-studies/choreograph',
     image: '/images/choreograph/card.png',
     hoverImage: '/images/choreograph/cardhover.png',
