@@ -1,160 +1,148 @@
-import { useNavigate } from 'react-router-dom';
-import { Lightbulb, Palette, LayoutDashboard, Target, Repeat, Users, Layers, Sparkles } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { LayoutDashboard, Code2, Rocket } from 'lucide-react';
+import { Reveal, DrawLine } from '../components/Reveal';
 
-const pulseFlowAnimation = `
-  @keyframes pulseFlow {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(200%);
-    }
-  }
-`;
+type Offer = {
+  icon: typeof LayoutDashboard;
+  title: string;
+  description: string;
+  evidence: { label: string; to: string }[];
+};
+
+type Step = {
+  title: string;
+  description: string;
+};
+
+const offers: Offer[] = [
+  {
+    icon: LayoutDashboard,
+    title: 'Product design, end to end',
+    description:
+      'Research, information architecture, workflows, interface, handoff. I own a product area rather than a screen, and I work directly with product owners and engineers. At Choreograph I own the design of an ads activation product used daily by global brands; at Petros I redesigned a pension enrollment that five departments had to agree on.',
+    evidence: [
+      { label: 'Choreograph', to: '/case-studies/choreograph' },
+      { label: 'Petros', to: '/case-studies/petros' },
+    ],
+  },
+  {
+    icon: Code2,
+    title: 'Design that ships, front-end included',
+    description:
+      'I build what I design when a team needs it: React and TypeScript, with AI-assisted tooling, from prototype to production-ready front-end. This portfolio and three product MVPs are built that way. It means my prototypes are real, and my handoffs are short.',
+    evidence: [{ label: 'This site', to: '/' }],
+  },
+  {
+    icon: Rocket,
+    title: 'Zero-to-one for founders',
+    description:
+      'Turning a promise that has already been sold into a product that can be built: scoping, cutting to the core, design system, first release. PepperLaw went from a sold vision to a full platform design in a month. Le Mans and Bible+ taught me what to cut, and I say so in the cases. This is the work I take on as a freelancer.',
+    evidence: [
+      { label: 'PepperLaw', to: '/case-studies/pepperlaw' },
+      { label: 'Bible+', to: '/case-studies/bibleplus' },
+    ],
+  },
+];
+
+const steps: Step[] = [
+  {
+    title: 'Reframe the brief',
+    description:
+      '"More signups" became "stop losing the people who already want to sign up". The brief names a symptom; the first job is finding the lever.',
+  },
+  {
+    title: 'Prototype to align, not to decorate',
+    description:
+      'When five departments disagree, a clickable prototype ends the "whether" and starts the "which". I build it early and put it in front of the people who have to say yes.',
+  },
+  {
+    title: 'Cut to the core',
+    description:
+      'Every feature has a reason. Together they make a product nobody understands on first open. I negotiate placement before I negotiate removal, and I remove when I have to.',
+  },
+  {
+    title: 'Ship, measure, and be honest about which is which',
+    description:
+      'I report what was measured as measured and what was projected as projected. When I did not get to measure, I say that too, and I push for the window to do it.',
+  },
+];
 
 export function Services() {
   const navigate = useNavigate();
 
-  const services = [
-    {
-      icon: LayoutDashboard,
-      title: "UI Design",
-      description: "Creating beautiful, intuitive interfaces that delight users and drive engagement through careful attention to visual hierarchy, typography, and micro-interactions.",
-      deliverables: ["Design Systems", "Component Libraries", "Interactive Prototypes", "Design Specifications"]
-    },
-    {
-      icon: Users,
-      title: "UX Strategy",
-      description: "Developing comprehensive user experience strategies that align business goals with user needs through research, testing, and iterative improvements.",
-      deliverables: ["User Research", "Journey Mapping", "Usability Testing", "Information Architecture"]
-    },
-    {
-      icon: Sparkles,
-      title: "No Code (AI)",
-      description: "Building sophisticated AI-powered applications without traditional coding, leveraging cutting-edge platforms and automation tools for rapid development.",
-      deliverables: ["AI Integration", "Workflow Automation", "Custom AI Tools", "Intelligent Systems"]
-    }
-  ];
-
-  const processSteps = [
-    {
-      icon: Lightbulb,
-      title: "Discovery",
-      description: "Understanding your goals, users, and business context through in-depth research and stakeholder interviews."
-    },
-    {
-      icon: Target,
-      title: "Strategy",
-      description: "Defining clear objectives and creating a roadmap for success based on research insights and business requirements."
-    },
-    {
-      icon: Palette,
-      title: "Design",
-      description: "Creating beautiful, functional solutions through iterative design sprints and continuous feedback loops."
-    },
-    {
-      icon: Layers,
-      title: "Deliver",
-      description: "Implementing and launching the final product with comprehensive documentation and support."
-    },
-    {
-      icon: Repeat,
-      title: "Iterate",
-      description: "Continuously improving the product based on user feedback and performance metrics."
-    }
-  ];
-
   return (
     <div className="pt-24 px-4 pb-16">
-      <div className="max-w-7xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-24">
-          <h1 className="text-5xl font-bold mb-6">Services</h1>
-          <p className="text-xl text-white/60 max-w-3xl mx-auto">
-            Transforming ideas into exceptional digital experiences through strategic design thinking and user-centered solutions.
+      <div className="max-w-6xl mx-auto">
+        <Reveal className="mb-24">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">How I work</h1>
+          <p className="text-2xl text-white/80 leading-relaxed">
+            I design B2B and enterprise products where the hard part is the complexity underneath: regulated flows, data-heavy tools, workflows shared by teams who don't agree. Most of my work starts with a brief that asks for a feature and ends with a product decision.
           </p>
-        </div>
+          <p className="text-xl text-white/60 leading-relaxed mt-6">
+            I work embedded in product teams, and I take on a small number of freelance engagements with founders each year.
+          </p>
+        </Reveal>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
-          {services.map((service, index) => (
-            <div 
-              key={index}
-              className="bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800 transition-all duration-300 group"
-            >
-              <service.icon className="w-12 h-12 mb-6 text-white/80 group-hover:text-white transition-colors" />
-              <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-              <p className="text-white/60 mb-8">{service.description}</p>
-              <div className="space-y-2">
-                {service.deliverables.map((deliverable, dIndex) => (
-                  <div 
-                    key={dIndex}
-                    className="bg-black/30 rounded-xl px-4 py-2 text-sm text-white/80"
-                  >
-                    {deliverable}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Design Process */}
-        <div className="mb-32">
-          <h2 className="text-3xl font-bold text-center mb-16">My Design Process</h2>
-          <div className="relative">
-            {/* Process Connection Line with Animation */}
-            <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 hidden md:block overflow-hidden">
-              <div className="h-1 w-full bg-neutral-800">
-                <div className="h-full" 
-                     style={{
-                       width: '50%',
-                       animation: 'pulseFlow 3s linear infinite',
-                       background: 'linear-gradient(90deg, transparent 0%, #FF00E5 50%, transparent 100%)'
-                     }}
-                />
-              </div>
-            </div>
-            
-            <style>{pulseFlowAnimation}</style>
-            
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-              {processSteps.map((step, index) => (
-                <div 
-                  key={index}
-                  className="relative group h-full"
-                >
-                  {/* Gradient background effect */}
-                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-blue-500 to-purple-500 rounded-[24px] opacity-0 group-hover:opacity-50 transition-all duration-700 blur-xl group-hover:blur-2xl" />
-                  
-                  <div className="relative bg-neutral-900 rounded-3xl p-8 hover:bg-neutral-800/80 transition-all duration-300 backdrop-blur-sm h-full flex flex-col">
-                    <step.icon className="w-10 h-10 mb-6 text-white/80 group-hover:text-white transition-colors" />
-                    <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-white via-white to-white/80 text-transparent bg-clip-text group-hover:to-white transition-all duration-300">
-                      {step.title}
-                    </h3>
-                    <p className="text-white/60 text-sm group-hover:text-white/80 transition-colors">
-                      {step.description}
-                    </p>
-                  </div>
+        <section className="mb-24">
+          <h2 className="text-3xl font-bold mb-8">What I do</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {offers.map((offer, index) => (
+              <Reveal
+                key={offer.title}
+                delay={index * 0.06}
+                className="bg-neutral-900 hover:bg-neutral-800 rounded-3xl p-8 flex flex-col transition-all duration-200 hover:-translate-y-0.5"
+              >
+                <offer.icon className="w-10 h-10 mb-6 text-white/80" />
+                <h3 className="text-2xl font-bold mb-4">{offer.title}</h3>
+                <p className="text-lg text-white/70 leading-relaxed mb-8 flex-1">
+                  {offer.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {offer.evidence.map((item) => (
+                    <Link
+                      key={item.to + item.label}
+                      to={item.to}
+                      className="bg-black/30 hover:bg-black/50 rounded-xl px-4 py-2 text-sm text-white/80 transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </Reveal>
+            ))}
           </div>
-        </div>
+        </section>
 
-        {/* CTA Section */}
-        <div className="bg-neutral-900 rounded-3xl p-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
-          <p className="text-white/60 mb-8 max-w-2xl mx-auto">
-            Let's work together to create something extraordinary. I'm ready to help you transform your ideas into reality.
+        <section className="mb-24">
+          <h2 className="text-3xl font-bold mb-8">How a project goes</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {steps.map((step, index) => (
+              <Reveal
+                key={step.title}
+                delay={index * 0.06}
+                className="bg-neutral-900 rounded-3xl p-8"
+              >
+                <p className="text-sm text-white/40">0{index + 1}</p>
+                <DrawLine delay={index * 0.06} />
+                <h3 className="text-xl font-bold mb-3 mt-4">{step.title}</h3>
+                <p className="text-lg text-white/70 leading-relaxed">{step.description}</p>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <Reveal className="bg-neutral-900 rounded-3xl p-12">
+          <h2 className="text-3xl font-bold mb-4">Working on something like this?</h2>
+          <p className="text-lg text-white/70 leading-relaxed mb-8 max-w-2xl">
+            Whether it's a product team that needs a designer who ships, or a founder with a promise to turn into a product, the fastest way to find out if I can help is a conversation.
           </p>
-          <button 
+          <button
             onClick={() => navigate('/contact')}
             className="px-8 py-3 bg-white text-black rounded-full hover:bg-white/90 transition-colors"
           >
-            Get in Touch
+            Get in touch
           </button>
-        </div>
+        </Reveal>
       </div>
     </div>
   );

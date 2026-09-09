@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Users, Target, CheckCircle2, Calendar, Code, Trophy, Lightbulb } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { ComparisonSlider } from '../../components/ComparisonSlider';
+import { Reveal } from '../../components/Reveal';
 import { getAdjacentCaseStudies, type CaseStudyNavItem } from '../../data/caseStudies';
 
 function getYouTubeEmbedUrl(url: string) {
@@ -250,6 +251,7 @@ function ImageFigure({
       : 'block w-full h-auto rounded-2xl';
 
   return (
+    <Reveal>
     <figure className="w-full flex flex-col">
       <div className={frameClass}>
         <img
@@ -264,6 +266,7 @@ function ImageFigure({
         </figcaption>
       )}
     </figure>
+    </Reveal>
   );
 }
 
@@ -293,6 +296,7 @@ function SectionImages({ images }: { images: CaseImage[] }) {
 function NarrativeSectionBlock({ section }: { section: NarrativeSection }) {
   return (
     <section className="mb-20">
+      <Reveal>
       <h2 className="text-3xl font-bold mb-6">{section.heading}</h2>
       {section.leadIn && (
         <p className="italic text-xl text-white/70 mb-6 leading-relaxed">
@@ -313,6 +317,7 @@ function NarrativeSectionBlock({ section }: { section: NarrativeSection }) {
           </p>
         ))}
       </div>
+      </Reveal>
       {section.images && <SectionImages images={section.images} />}
     </section>
   );
