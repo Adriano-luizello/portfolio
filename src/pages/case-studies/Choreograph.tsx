@@ -10,12 +10,12 @@ const caseStudyData: NarrativeCase = {
   confidentialityNote:
     'Screens shown are product interfaces from my work at Choreograph. Client data, campaign details and identifying information have been omitted.',
   inShort:
-    'At Choreograph, WPP\'s data and technology company, I own the design of Create Optimization, the product activation teams use to decide which ad goes to whom, where and when. The most significant thing I designed there is the Decision Tree: a visual way to build targeting strategies that replaced a rule-based workflow where nobody could see the whole strategy or which rule beat which. It\'s in production, used daily by global brands and their agencies, and ==the product\'s VP called it the most relevant launch of the last four years==. The work that mattered most wasn\'t the tree itself; it was keeping it simple while an entire ad-tech organization wanted to add one more thing to it.',
+    'At Choreograph, WPP\'s data and technology company, I own the design of Create Optimization, the product activation teams use to decide which ad goes to whom, where and when. The most significant thing I designed there is the Decision Tree: a visual way to build targeting strategies that replaced a rule-based workflow where nobody could see the whole strategy or which rule beat which. It has been the platform\'s default workflow since August 2025, is used daily by global brands and their agencies, and ==the product\'s VP called it the most relevant launch of the last four years==. The work that mattered most wasn\'t the tree itself; it was keeping it simple while an entire ad-tech organization wanted to add one more thing to it.',
   sections: [
     {
       heading: 'Context and my role',
       paragraphs: [
-        'Choreograph\'s design team works one designer per product, as peers. Mine is Create Optimization, the activation side of the platform: campaign setup, targeting, ad variants, trafficking. Product owners hold the client relationships and bring the feedback; I turn it into product decisions with them and with the engineering team. I also support Creative Analytics when needed, but activation is my remit.',
+        'Choreograph\'s design team works one designer per product, as peers. Mine is Create Optimization, the activation side of the platform: campaign setup, targeting, ad variants, trafficking. The platform serves over 1.5 billion impressions a month across display, online video and connected TV. Product owners hold the client relationships and bring the feedback; I turn it into product decisions with them and with the engineering team. I also support Creative Analytics when needed, but activation is my remit.',
       ],
       images: [
         {
@@ -44,8 +44,8 @@ const caseStudyData: NarrativeCase = {
     {
       heading: 'Why a tree',
       paragraphs: [
-        'A targeting strategy is a sequence of decisions: by location, then by audience, then by time or weather, ending in an ad variant. Drawn as a tree, ==precedence stops being a hidden property of the rules and becomes the shape of the diagram==: whatever is upstream decides first. Overlaps become visible as branches. The whole strategy fits on one canvas, and the side panel shows the detail of whichever node you\'re on.',
-        'We validated the direction in research with internal stakeholders, external clients and agencies in markets as different as Colombia and the Nordics. The tree read the same way everywhere, which is what a visual grammar for strategy needs to do.',
+        'A targeting strategy is a sequence of decisions: by location, then by audience, then by date and time, weather, a feed lookup or a DSP signal, ending in an ad variant. In the product this is three node types: a starting node, decision nodes, and outcome nodes that hold the variants. Drawn as a tree, ==precedence stops being a hidden property of the rules and becomes the shape of the diagram==: whatever is upstream decides first. Overlaps become visible as branches. The whole strategy fits on one canvas, and the side panel shows the detail of whichever node you\'re on.',
+        'We validated the direction in research: a usability study with ten participants at a UK agency, light and medium users and non-users, on the custom strategy, setup and publish flows; sessions with clients and agencies in markets as different as Colombia and the Nordics; and later a multimarket audience study on how global strategies flex per market. The tree read the same way everywhere, which is what a visual grammar for strategy needs to do.',
       ],
       images: [
         {
@@ -79,7 +79,7 @@ const caseStudyData: NarrativeCase = {
     {
       heading: 'Scaling past drag and drop',
       paragraphs: [
-        'The first versions had weak bulk actions, and it showed with real campaigns: a tree with dozens of cities and time slots meant dragging dozens of nodes. The fix came from how activation teams actually work. They already organize campaigns in spreadsheets, so we built a CSV import where ==the user maps their columns to the tree\'s dimensions and the tree builds itself==: nodes created, targeting configured, ads assigned. The drag-and-drop stays for adjustments; the heavy lifting moved to a format the teams already had.',
+        'The first versions had weak bulk actions, and it showed with real campaigns: a tree with dozens of cities and time slots meant dragging dozens of nodes. Then location-heavy advertisers pushed trees past roughly 2,500 outcome nodes, with store-level and zip-code targeting fanning out into thousands of branches, and the canvas and the publish step both hit their limits. The fix came from how activation teams actually work. They already organize campaigns in spreadsheets, so we built a CSV import where ==the user maps their columns to the tree\'s dimensions and the tree builds itself==: nodes created, targeting configured, ads assigned. The drag-and-drop stays for adjustments; the heavy lifting moved to a format the teams already had. Alongside it came bulk tracker management with root-to-leaf inheritance and server-side tracker generation on publish, and a scale target for the next cycle: 5,000-node trees loading in under five seconds.',
       ],
       images: [
         {
@@ -93,13 +93,13 @@ const caseStudyData: NarrativeCase = {
     {
       heading: 'Constraints',
       paragraphs: [
-        'A mature platform with existing clients, so nothing could break the rule-based flows people still ran. Many stakeholders with legitimate feature requests. And performance with large trees, which shaped how much the canvas could show at once.',
+        'A mature platform with existing clients, so nothing could break the rule-based flows people still ran. Many stakeholders with legitimate feature requests. Performance with large trees, which shaped how much the canvas could show at once. And privacy and compliance requirements from global clients, which had to become reusable patterns rather than exceptions.',
       ],
     },
     {
       heading: 'What\'s next',
       paragraphs: [
-        'The roadmap\'s first priority is an AI-assisted workflow: describing a strategy in plain language and getting a first tree to refine. After that, connecting several nodes to the same destination to reduce redundancy in large campaigns, and a campaign changelog. The concepts below are explorations, not shipped work.',
+        'Algorithmic content optimization already runs inside tree branches, so the tree is also the surface where the platform\'s optimization layer lives. The roadmap\'s first priority is an AI-assisted workflow: describing a strategy in plain language and getting a first tree to refine. After that, connecting several nodes to the same destination to reduce redundancy in large campaigns, and a campaign changelog. The concepts below are explorations, not shipped work.',
       ],
       images: [
         {
@@ -120,7 +120,7 @@ const caseStudyData: NarrativeCase = {
   outcome: {
     areProjected: false,
     intro:
-      'The Decision Tree is in production and used daily by activation teams at global brands and agencies. The product\'s VP described it as the most relevant launch in the last four years.',
+      'The Decision Tree has been the platform\'s default workflow since August 2025 and is used daily by activation teams at global brands and agencies. The product\'s VP described it as the most relevant launch in the last four years. The follow-up work on scale and bulk tooling shipped through 2026.',
     note: 'Screens in this case are the product\'s interfaces with client data removed, and I\'m not sharing performance metrics here.',
     tiles: [
       {
@@ -132,7 +132,7 @@ const caseStudyData: NarrativeCase = {
         description: 'Product VP',
       },
       {
-        metric: 'Validated across 3 continents',
+        metric: 'Validated in Europe and Latin America',
         description: '',
       },
     ],
@@ -140,7 +140,7 @@ const caseStudyData: NarrativeCase = {
   closing: {
     heading: "What I'd do differently",
     paragraphs: [
-      '==I\'d have pushed the CSV import into the first release.== We learned about the bulk problem from real campaigns, which is a good way to learn but a slow one, and the signal was already there in research: every team we talked to had a spreadsheet. I\'d also have set a rule earlier for what goes in the top bar, before the first request arrived, instead of negotiating each one.',
+      '==I\'d have pushed the CSV import into the first release.== We learned about the bulk problem from real campaigns, which is a good way to learn but a slow one, and the signal was already there in research: every team we talked to had a spreadsheet. I\'d also have set a rule earlier for what goes in the top bar, before the first request arrived, instead of negotiating each one. And I\'d have asked engineering for a node budget on day one: we found the 2,500-node ceiling with a client\'s campaign, and a number agreed upfront would have made the scale work a plan instead of a response.',
     ],
   },
 };

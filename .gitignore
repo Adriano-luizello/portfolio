@@ -31,3 +31,6 @@ dist-ssr
 
 *.tsbuildinfo
 vite.config.d.ts
+
+# Local Claude app outputs
+Claude outputs/
